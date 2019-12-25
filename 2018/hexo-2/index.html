@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/uploads/favicon/safari-pinned-tab.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Sarasa Mono SC,Lato,PingFang SC,Microsoft YaHei,sans-serif;:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://archcst.me').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="上一章已经使用 Github 开始管理整个博客目录，在每一次对 Hexo 进行配置之前记得先 commit，以免炸机。用 emacs 时间长了对所有其他轻量级标记语言都熟视无睹，只有 Org mode 才是真爱。本章实现用 .org 文件写博客，如果你用 Markdown，请跳过这一章，Hexo 默认的语法就是 Markdown。hexo-renderer-org 已经很久不更新，目前是无法使用的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo 静态博客搭建参考（二）：使用 org-mode 编写博文">
+<meta property="og:url" content="http://archcst.me/2018/hexo-2/index.html">
+<meta property="og:site_name" content="ArchCST&#39;s Blog">
+<meta property="og:description" content="上一章已经使用 Github 开始管理整个博客目录，在每一次对 Hexo 进行配置之前记得先 commit，以免炸机。用 emacs 时间长了对所有其他轻量级标记语言都熟视无睹，只有 Org mode 才是真爱。本章实现用 .org 文件写博客，如果你用 Markdown，请跳过这一章，Hexo 默认的语法就是 Markdown。hexo-renderer-org 已经很久不更新，目前是无法使用的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-09-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2018-09-03T16:00:00.000Z">
+<meta property="article:author" content="ArchCST">
+<meta property="article:tag" content="learn">
+<meta property="article:tag" content="emacs">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://archcst.me/2018/hexo-2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Hexo 静态博客搭建参考（二）：使用 org-mode 编写博文 | ArchCST's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta custom-logo">
+      <div class="site-meta-headline">
+        <a>
+          <img class="custom-logo-image" src="/uploads/logo.png" alt="ArchCST's Blog">
+        </a>
+      </div>
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ArchCST's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-java">
+
+    <a href="/tags/java/" rel="section"><i class="fa fa-fw fa-coffee"></i>爪哇</a>
+
+  </li>
+        <li class="menu-item menu-item-learn">
+
+    <a href="/tags/learn/" rel="section"><i class="fa fa-fw fa-mortar-board"></i>学海</a>
+
+  </li>
+        <li class="menu-item menu-item-zen">
+
+    <a href="/tags/zen/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>心法</a>
+
+  </li>
+        <li class="menu-item menu-item-cheatsheet">
+
+    <a href="/tags/cheatsheet/" rel="section"><i class="fa fa-fw fa-pencil-square"></i>小抄</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://archcst.me/2018/hexo-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="ArchCST">
+      <meta itemprop="description" content="待得秋来九月八，<br>我花开时百花杀。<br>冲天香阵透长安，<br>满城尽带黄金甲。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ArchCST's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hexo 静态博客搭建参考（二）：使用 org-mode 编写博文
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-09-02 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-02T00:00:00+08:00">2018-09-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-09-04 00:00:00" itemprop="dateModified" datetime="2018-09-04T00:00:00+08:00">2018-09-04</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2018/hexo-2/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2018/hexo-2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>上一章已经使用 Github 开始管理整个博客目录，在每一次对 Hexo 进行配置之前记得先 commit，以免炸机。<br>用 emacs 时间长了对所有其他轻量级标记语言都熟视无睹，只有 <a href="https://orgmode.org/" target="_blank" rel="noopener">Org mode</a> 才是真爱。本章实现用 <code>.org</code> 文件写博客，如果你用 Markdown，请跳过这一章，Hexo 默认的语法就是 Markdown。<br><a href="https://github.com/coldnew/hexo-renderer-org" target="_blank" rel="noopener">hexo-renderer-org</a> 已经很久不更新，目前是无法使用的状态，经过一下午的 Debug 并没有找到好的修复方法。目前<strong>唯一</strong>的方法是将 <code>.org</code> 文件转换为 Hexo 支持的 GitHub Flavored Markdown (GFM) 格式。<br>本来以为半小时可以搞定，结果被 <code>metadata</code> 问题卡了一整天…查阅了无数文档翻遍了 Github 终于还是搞定了，就当练英语了。<br>用 emacs 的人还是太少了啊。  </p>
+<a id="more"></a>
+
+<h1 id="配置-ox-gfm"><a href="#配置-ox-gfm" class="headerlink" title="配置 ox-gfm"></a>配置 ox-gfm</h1><p>emacs 原生的 <code>ox-md.el</code> 支持的是 2004 年版本标准的 Markdown 格式，需要使用 <a href="https://github.com/larstvei/ox-gfm" target="_blank" rel="noopener">ox-gfm</a> 来实现对 GFM 的支持<br>如果是原生 emacs，在配置文件中添加 <code>require</code>：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(eval-after-load &quot;org&quot;</span><br><span class="line">  &#39;(require &#39;ox-gfm nil t))</span><br></pre></td></tr></table></figure>
+
+<p>我用 <a href="http://spacemacs.org/" target="_blank" rel="noopener">spacemacs</a>，自带了 <code>ox-gfm</code>，默认没有启用，需要在 <code>org layer</code> 中开启<br>在 <code>~/.spacemacs</code> 或 <code>~/.spacemacs.d/init.el</code> 中找到 <code>dotspacemacs-configuration-layers</code>：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(org :variables</span><br><span class="line">      org-enable-github-support t)</span><br></pre></td></tr></table></figure>
+
+<p>这样就开启了 <code>ox-gfm</code>，通过 <code>ox-gfm</code> 可以实现 .org 文件对 GFM 文件的转换  </p>
+<h2 id="让-ox-gfm-更好的适配-hexo"><a href="#让-ox-gfm-更好的适配-hexo" class="headerlink" title="让 ox-gfm 更好的适配 hexo"></a>让 ox-gfm 更好的适配 hexo</h2><p>在 <code>private layer</code> 中添加代码，我是直接写在 <code>~/.spacemacs.d/layers/ArchCST/funcs.el</code>中的：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">;; transfer .org file to .md format for Hexo</span><br><span class="line">(defun ArchCST&#x2F;hexo-ox-gfm (&amp;optional async subtreep visible-only)</span><br><span class="line">  (interactive)</span><br><span class="line">  (let ((outfile (org-export-output-file-name &quot;.md&quot; subtreep &quot;~&#x2F;git&#x2F;CSTHexo&#x2F;source&#x2F;_posts&quot;)))</span><br><span class="line">    (org-export-to-file &#39;gfm outfile async subtreep visible-only)))</span><br><span class="line"></span><br><span class="line">(spacemacs&#x2F;set-leader-keys &quot;dhe&quot; &#39;ArchCST&#x2F;hexo-ox-gfm)</span><br></pre></td></tr></table></figure>
+
+<p>这段代码利用 GFM 作为 backend 来输出 Markdown 文件，文件名保持和源文件一致，然后自动输出到 Hexo 目录中。<br>第三行末尾的路径改为你自己的 <code>_posts</code> 目录路径，最后一行我绑定了快捷键 <code>SPC d h e</code>，如果是原生 emacs 可根据自己需要写 <code>global-set-key</code> 绑定快捷键  </p>
+<h1 id="Metadata-的处理"><a href="#Metadata-的处理" class="headerlink" title="Metadata 的处理"></a>Metadata 的处理</h1><p>Hexo 接受以下 Metadata：  </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">layout:</span> <span class="string">post</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">标题</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2018</span><span class="number">-09</span><span class="number">-1</span></span><br><span class="line"><span class="attr">updated:</span> <span class="number">2019</span><span class="number">-09</span><span class="number">-02</span></span><br><span class="line"><span class="attr">comments:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">tag1</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">tag2</span></span><br><span class="line"><span class="attr">categories:</span> <span class="string">分类</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">覆盖文章网址</span></span><br><span class="line"><span class="string">------</span></span><br></pre></td></tr></table></figure>
+
+<p><code>yaml</code> 的 <code>metadata</code> 以 <code>---</code> 结尾，但经过 <code>ox-gfm</code> 转义后 <code>---</code> 会转换为分页符，解决方法是用 6 个短横线 <code>------</code> 代替。<br>还需要添加 <code>org mode</code> 的 metadata：<code>#+OPTIONS: toc:nil \n:t</code>，以免生成 <code>TOC (table of content)</code> 导致 Hexo 无法读取 <code>yaml</code> 配置<br>其中 <code>toc:nil</code> 表示不生成 Markdown 文件内的 <code>TOC</code>，否则会干扰 Hexo 读取 yaml。我们使用 Next 主题的 <code>TOC</code>，更美观实用<br>同时根据 <code>.org</code> 文件的默认设置，文本之间需要空一行，否则转换之后多行之间将没有换行符。添加 <code>\n:t</code> 即可实现自动给提行添加换行符<br>合在一起头部信息应该像这样：  </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#+OPTIONS: toc:nil \n:t</span></span><br><span class="line"><span class="attr">layout:</span> <span class="string">post</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">标题</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2018</span><span class="number">-09</span><span class="number">-1</span></span><br><span class="line"><span class="attr">updated:</span> <span class="number">2019</span><span class="number">-09</span><span class="number">-02</span></span><br><span class="line"><span class="attr">comments:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">tag1</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">tag2</span></span><br><span class="line"><span class="attr">categories:</span> <span class="string">分类</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">覆盖文章网址</span></span><br><span class="line"><span class="string">------</span></span><br></pre></td></tr></table></figure>
+
+<p>这里也提供一段自己写的自动添加头部信息的代码，实现了用快捷键 <code>SPC d h i</code> 自动在文件头部添加 <a href="https://hexo.io/zh-cn/docs/front-matter" target="_blank" rel="noopener">Hexo 文档</a> 提到的所有 metadata，然后自动跳转到 <code>title:</code> 尾部进入 insert mode<br>已经预留了 yaml 所必须的空格，使用上非常方便。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">;; insert metadata at the top of file for Hexo</span><br><span class="line">(defun ArchCST&#x2F;hexo-insert-metadata ()</span><br><span class="line">  (interactive)</span><br><span class="line">  (evil-goto-first-line)</span><br><span class="line">  (insert-before-markers &quot;#+OPTIONS: toc:nil \\n:t</span><br><span class="line">title: </span><br><span class="line">date: </span><br><span class="line">updated: </span><br><span class="line">comments: true</span><br><span class="line">tags:</span><br><span class="line">  - </span><br><span class="line">categories: </span><br><span class="line">layout: post</span><br><span class="line">permalink: </span><br><span class="line">------</span><br><span class="line">&quot;)</span><br><span class="line">  (evil-goto-line 2)</span><br><span class="line">  (evil-append-line 0)</span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line">(spacemacs&#x2F;set-leader-keys &quot;dhi&quot; &#39;ArchCST&#x2F;hexo-insert-metadata)</span><br></pre></td></tr></table></figure>
+
+<p>这段代码针对 Spacemacs 的 Vim 模式用户，用原生 emacs 配 evil 也可修改末行的快捷键绑定函数来使用。用 emacs 原生编辑模式可能需要删掉 <code>evil</code> 相关行。  </p>
+<p><code>data:</code> 和 <code>updated:</code> 后面可以使用 <code>SPC m d t</code> 或者 <code>C-c .</code> 来添加 Org mode 的时间戳，不必使用手动录入。  </p>
+<h1 id="支持的标签"><a href="#支持的标签" class="headerlink" title="支持的标签"></a>支持的标签</h1><p>代码框内的为 <code>.org</code> 文件中的原文，代码框之后的是效果。<br>另外，代码块依旧是用 <code>#+BEGIN_SRC language</code> 和 <code>#+END_SRC</code> 包起来  </p>
+<h2 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h2><p>.org 文件中的原文：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">中间的&#x2F;斜体&#x2F;为测试文本</span><br><span class="line">中间的*粗体*为测试文本</span><br><span class="line">中间的~代码~为测试文本</span><br><span class="line">中间的&#x3D;代码&#x3D;为测试文本</span><br><span class="line">中间的+删除+为测试文本</span><br></pre></td></tr></table></figure>
+
+<p>效果：<br>中间的<em>斜体</em>为测试文本<br>中间的<strong>粗体</strong>为测试文本<br>中间的<code>代码</code>为测试文本<br>中间的<code>代码</code>为测试文本<br>中间的<del>删除</del>为测试文本  </p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% cq %&#125; </span><br><span class="line">&#x2F;斜体&#x2F; *粗体* ~代码~ &#x3D;代码&#x3D; +删除+</span><br><span class="line">&#123;% endcq %&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote class="blockquote-center"><p><em>斜体</em> <strong>粗体</strong> <code>代码</code> <code>代码</code> <del>删除</del>  </p>
+</blockquote>  
+
+<h2 id="Bootstrap-Callout"><a href="#Bootstrap-Callout" class="headerlink" title="Bootstrap Callout"></a>Bootstrap Callout</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;% note default %&#125; </span><br><span class="line">default &#x2F;斜体&#x2F; *粗体* ~代码~ &#x3D;代码&#x3D; +删除+</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">&#123;% note primary %&#125; primary &#123;% endnote %&#125;</span><br><span class="line">&#123;% note success %&#125; success &#123;% endnote %&#125;</span><br><span class="line">&#123;% note info %&#125; info &#123;% endnote %&#125;</span><br><span class="line">&#123;% note warning %&#125; warning &#123;% endnote %&#125;</span><br><span class="line">&#123;% note danger %&#125; danger  &#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note default">
+            <p>default <em>斜体</em> <strong>粗体</strong> <code>代码</code> <code>代码</code> <del>删除</del>  </p>
+          </div>  
+<div class="note primary">
+            <p>primary </p>
+          </div>  
+<div class="note success">
+            <p>success </p>
+          </div>  
+<div class="note info">
+            <p>info </p>
+          </div>  
+<div class="note warning">
+            <p>warning </p>
+          </div>  
+<div class="note danger">
+            <p>danger  </p>
+          </div>  
+
+<p>主题配置文件中的 <code># Note tag (bs-callout)</code> 段落可以对 Bootstrap Callout 进行样式上的配置。  </p>
+<p><a href="https://hexo.io/zh-cn/docs/tag-plugins" target="_blank" rel="noopener">标签插件（Tag Plugins） | Hexo</a> 中有更多的内建标签用法  </p>
+<h1 id="遗留问题（Solved）"><a href="#遗留问题（Solved）" class="headerlink" title="遗留问题（Solved）"></a>遗留问题（Solved）</h1><p>本文提供的代码可以在 <a href="https://github.com/ArchCST/spacemacs" target="_blank" rel="noopener">我的 Github</a> 上找到。  </p>
+<p>本章实现的方式基本上解决了 orgmode with hexo 的诸多问题，实际上是使用了比较苯的方法，只是在使用上还算方便。  </p>
+<p>目前遗留的问题是 <code>&lt;!-- more --&gt;</code> 标签阅读更多这一块还没有找到合适的解决方案，暂时只能用 Next 主题配置文件提供的：  </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">auto_excerpt:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">length:</span> <span class="number">300</span></span><br></pre></td></tr></table></figure>
+
+<p>来实现以固定字数自动生成摘要，无法精确控制。  </p>
+<p>如果你有解决办法，或者更好的方式实现 Orgmode with Hexo，请在本文下面留言、<a href="http://t.me/archcst" target="_blank" rel="noopener">Telegram</a>，或者在 <a href="https://github.com/ArchCST/spacemacs" target="_blank" rel="noopener">我的 Github</a> 中提交 issue，万分感谢！  </p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>可以通过添加 <code>#+HTML: &lt;!-- more --&gt;</code> 来解决，ox-gfm 会跳过所有的 <code>#+HTML:</code> 行。  </p>
+<p>同时，没有特殊字符的 <code>html 标签</code> 也是不会被转义的，基本上都可以直接使用，这就给自定义 <span class="cst-red">CSS</span> 提供了土壤…  </p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ArchCST
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://archcst.me/2018/hexo-2/" title="Hexo 静态博客搭建参考（二）：使用 org-mode 编写博文">http://archcst.me/2018/hexo-2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/learn/" rel="tag"># learn</a>
+              <a href="/tags/emacs/" rel="tag"># emacs</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/hexo-1/" rel="prev" title="Hexo 静态博客搭建参考（一）：本地搭建">
+      <i class="fa fa-chevron-left"></i> Hexo 静态博客搭建参考（一）：本地搭建
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/sorted3-alfred/" rel="next" title="通过 Alfred 从 MacOS 向 Sorted 3 中添加任务">
+      通过 Alfred 从 MacOS 向 Sorted 3 中添加任务 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#配置-ox-gfm"><span class="nav-number">1.</span> <span class="nav-text">配置 ox-gfm</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#让-ox-gfm-更好的适配-hexo"><span class="nav-number">1.1.</span> <span class="nav-text">让 ox-gfm 更好的适配 hexo</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Metadata-的处理"><span class="nav-number">2.</span> <span class="nav-text">Metadata 的处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#支持的标签"><span class="nav-number">3.</span> <span class="nav-text">支持的标签</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字体"><span class="nav-number">3.1.</span> <span class="nav-text">字体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">3.2.</span> <span class="nav-text">引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bootstrap-Callout"><span class="nav-number">3.3.</span> <span class="nav-text">Bootstrap Callout</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#遗留问题（Solved）"><span class="nav-number">4.</span> <span class="nav-text">遗留问题（Solved）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案"><span class="nav-number">4.1.</span> <span class="nav-text">解决方案</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ArchCST"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">ArchCST</p>
+  <div class="site-description" itemprop="description">待得秋来九月八，<br>我花开时百花杀。<br>冲天香阵透长安，<br>满城尽带黄金甲。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ArchCST" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ArchCST" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://t.me/archcst" title="Telegram → http:&#x2F;&#x2F;t.me&#x2F;archcst" rel="noopener" target="_blank"><i class="fa fa-fw fa-telegram"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-motorcycle"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ArchCST</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: 'fRdrw3LASBz5hfs31n0aFQ9k-gzGzoHsz',
+      appKey: '60YcTNfvxGk5yGkkc8o1WhI7',
+      placeholder: "ヾﾉ≧∀≦)o 不服来战!",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: false,
+      lang: '' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

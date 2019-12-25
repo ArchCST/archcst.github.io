@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/uploads/favicon/safari-pinned-tab.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Sarasa Mono SC,Lato,PingFang SC,Microsoft YaHei,sans-serif;:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://archcst.me').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="待得秋来九月八，我花开时百花杀。冲天香阵透长安，满城尽带黄金甲。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ArchCST&#39;s Blog">
+<meta property="og:url" content="http://archcst.me/page/3/index.html">
+<meta property="og:site_name" content="ArchCST&#39;s Blog">
+<meta property="og:description" content="待得秋来九月八，我花开时百花杀。冲天香阵透长安，满城尽带黄金甲。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="ArchCST">
+<meta property="article:tag" content="emacs">
+<meta property="article:tag" content="spacemacs">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="运维">
+<meta property="article:tag" content="效率">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://archcst.me/page/3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: true,
+    isPost: false
+  };
+</script>
+
+  <title>ArchCST's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta custom-logo">
+      <div class="site-meta-headline">
+        <a>
+          <img class="custom-logo-image" src="/uploads/logo.png" alt="ArchCST's Blog">
+        </a>
+      </div>
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ArchCST's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-java">
+
+    <a href="/tags/java/" rel="section"><i class="fa fa-fw fa-coffee"></i>爪哇</a>
+
+  </li>
+        <li class="menu-item menu-item-learn">
+
+    <a href="/tags/learn/" rel="section"><i class="fa fa-fw fa-mortar-board"></i>学海</a>
+
+  </li>
+        <li class="menu-item menu-item-zen">
+
+    <a href="/tags/zen/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>心法</a>
+
+  </li>
+        <li class="menu-item menu-item-cheatsheet">
+
+    <a href="/tags/cheatsheet/" rel="section"><i class="fa fa-fw fa-pencil-square"></i>小抄</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://archcst.me/2018/cs-python-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="ArchCST">
+      <meta itemprop="description" content="待得秋来九月八，<br>我花开时百花杀。<br>冲天香阵透长安，<br>满城尽带黄金甲。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ArchCST's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/cs-python-1/" class="post-title-link" itemprop="url">Cheatsheet Python3 - 基础</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-09-28 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-28T00:00:00+08:00">2018-09-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-11-22 00:00:00" itemprop="dateModified" datetime="2018-11-22T00:00:00+08:00">2018-11-22</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2018/cs-python-1/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2018/cs-python-1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Cheatsheet 类博文详情请见 <a href="https://archcst.me/about/">关于页面</a>。<br>为便于理解，本文注释使用了中文，遵循 <a href="https://www.python.org/dev/peps/pep-0008/" target="_blank" rel="noopener">PEP 8</a> 不应该在代码中使用中文。<br>学习资料：<a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000" target="_blank" rel="noopener">Python教程 - 廖雪峰的官方网站</a>  </p>
+<h1 id="Python-基础"><a href="#Python-基础" class="headerlink" title="Python 基础"></a>Python 基础</h1><p>使用 <code>~#~</code> 作为注释<br>以 <code>~:~</code> 作为结尾的语句，下接缩进的 <code>语句块</code> 。<br>约定俗成，避免错误，坚持使用 <code>4个空格</code> 的缩进。<br>Python 大小写敏感。  </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/cs-python-1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://archcst.me/2018/MySQL-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="ArchCST">
+      <meta itemprop="description" content="待得秋来九月八，<br>我花开时百花杀。<br>冲天香阵透长安，<br>满城尽带黄金甲。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ArchCST's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/MySQL-1/" class="post-title-link" itemprop="url">MySQL 入门指南</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-09-16 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-16T00:00:00+08:00">2018-09-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-23 11:42:42" itemprop="dateModified" datetime="2019-12-23T11:42:42+08:00">2019-12-23</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2018/MySQL-1/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2018/MySQL-1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>MySQL 语句是不区分大小写的，但是为了区分保留字和变量名，一般把保留字大写，变量和数据小写。<br>本文是以前学习 MySQL 时写的，非常基础，内容也比一般的教程更详细一些，基本上操作完本文内容，就对数据库有了一个直观的了解了。  </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/MySQL-1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://archcst.me/2018/iTerm2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="ArchCST">
+      <meta itemprop="description" content="待得秋来九月八，<br>我花开时百花杀。<br>冲天香阵透长安，<br>满城尽带黄金甲。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ArchCST's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/iTerm2/" class="post-title-link" itemprop="url">Mac OS 下使用 iTerm + Zsh + Oh-My-Zsh 打造完美终端</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-09-16 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-16T00:00:00+08:00">2018-09-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-27 11:05:29" itemprop="dateModified" datetime="2018-12-27T11:05:29+08:00">2018-12-27</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2018/iTerm2/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2018/iTerm2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <img src="/uploads/postpics/iTerm2.png" alt="img" width="" />
+
+<p>Iterm2 是 Mac OS X 下的一个终端模拟器，类似于 Terminal。但 Iterm2 比 Terminal 多了很多配置上的优势，界面更清晰美观，扩展性更好。  </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/iTerm2/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://archcst.me/2018/org-page/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="ArchCST">
+      <meta itemprop="description" content="待得秋来九月八，<br>我花开时百花杀。<br>冲天香阵透长安，<br>满城尽带黄金甲。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ArchCST's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/org-page/" class="post-title-link" itemprop="url">org-page 安装使用记录</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-09-16 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-16T00:00:00+08:00">2018-09-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-10-11 15:51:16" itemprop="dateModified" datetime="2018-10-11T15:51:16+08:00">2018-10-11</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2018/org-page/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2018/org-page/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>org-page 是 <a href="https://github.com/kelvinh/org-page" target="_blank" rel="noopener">kelvinh</a> 制作的一款以 org-mode 文件作为源文件的静态网站生成器，非常的轻量，具有高可定制性。<br>我在制作 org-to-hexo 的时候研究很久 org-page 的代码，写得真是漂亮。所以虽然现在不用 org-page 了，依然放上来作为一个参考。<br>本文基于 spacemacs 和 shell，用 shell 主要是观察 org-page 具体做了些什么操作。  </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/org-page/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://archcst.me/2018/loginput-remote-osx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="ArchCST">
+      <meta itemprop="description" content="待得秋来九月八，<br>我花开时百花杀。<br>冲天香阵透长安，<br>满城尽带黄金甲。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ArchCST's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/loginput-remote-osx/" class="post-title-link" itemprop="url">落格输入法使用 fcitx-remote-for-osx 实现 spacemacs 自动切换中英文</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-09-05 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-05T00:00:00+08:00">2018-09-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-10-11 15:51:16" itemprop="dateModified" datetime="2018-10-11T15:51:16+08:00">2018-10-11</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2018/loginput-remote-osx/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2018/loginput-remote-osx/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Mac 下使用 Vim 或 Spacemacs 的用户可能需要在退出 Insert Mode 进入 Normal Mode 的时候自动切换回英文输入法，避免中文输入法截断快捷键的输入。 fcitx-remote-for-osx 插件可以实现这个功能。  </p>
+<p>使用搜狗输入法只需要查阅 <a href="https://github.com/CodeFalling/fcitx-remote-for-osx" target="_blank" rel="noopener">fcitx-remote-for-osx 的官方 Github</a> 照搬即可，这里只提一下官方还没有支持的落格输入法如何实现。  </p>
+<p>本文已被落格官方收录  </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/loginput-remote-osx/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://archcst.me/2018/sorted3-alfred/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="ArchCST">
+      <meta itemprop="description" content="待得秋来九月八，<br>我花开时百花杀。<br>冲天香阵透长安，<br>满城尽带黄金甲。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ArchCST's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/sorted3-alfred/" class="post-title-link" itemprop="url">通过 Alfred 从 MacOS 向 Sorted 3 中添加任务</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-09-04 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-04T00:00:00+08:00">2018-09-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-23 13:30:03" itemprop="dateModified" datetime="2019-12-23T13:30:03+08:00">2019-12-23</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2018/sorted3-alfred/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2018/sorted3-alfred/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>一直在电脑上用 orgmode，iOS 也下载了 beorg，但总是觉得有一些琐事并不需要使用 orgmode，而且有时候 beorg 的同步会出现一些奇奇怪怪的问题。  </p>
+<p>Omnifocus 用过很长一段时间，但既然是作为跟踪琐事来用，Omnifocus 也显得过于庞大了些。  </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/sorted3-alfred/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://archcst.me/2018/hexo-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="ArchCST">
+      <meta itemprop="description" content="待得秋来九月八，<br>我花开时百花杀。<br>冲天香阵透长安，<br>满城尽带黄金甲。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ArchCST's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/hexo-2/" class="post-title-link" itemprop="url">Hexo 静态博客搭建参考（二）：使用 org-mode 编写博文</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-09-02 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-02T00:00:00+08:00">2018-09-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-09-04 00:00:00" itemprop="dateModified" datetime="2018-09-04T00:00:00+08:00">2018-09-04</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2018/hexo-2/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2018/hexo-2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>上一章已经使用 Github 开始管理整个博客目录，在每一次对 Hexo 进行配置之前记得先 commit，以免炸机。<br>用 emacs 时间长了对所有其他轻量级标记语言都熟视无睹，只有 <a href="https://orgmode.org/" target="_blank" rel="noopener">Org mode</a> 才是真爱。本章实现用 <code>.org</code> 文件写博客，如果你用 Markdown，请跳过这一章，Hexo 默认的语法就是 Markdown。<br><a href="https://github.com/coldnew/hexo-renderer-org" target="_blank" rel="noopener">hexo-renderer-org</a> 已经很久不更新，目前是无法使用的状态，经过一下午的 Debug 并没有找到好的修复方法。目前<strong>唯一</strong>的方法是将 <code>.org</code> 文件转换为 Hexo 支持的 GitHub Flavored Markdown (GFM) 格式。<br>本来以为半小时可以搞定，结果被 <code>metadata</code> 问题卡了一整天…查阅了无数文档翻遍了 Github 终于还是搞定了，就当练英语了。<br>用 emacs 的人还是太少了啊。  </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/hexo-2/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://archcst.me/2018/hexo-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="ArchCST">
+      <meta itemprop="description" content="待得秋来九月八，<br>我花开时百花杀。<br>冲天香阵透长安，<br>满城尽带黄金甲。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ArchCST's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/hexo-1/" class="post-title-link" itemprop="url">Hexo 静态博客搭建参考（一）：本地搭建</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-09-01 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-01T00:00:00+08:00">2018-09-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-09-04 00:00:00" itemprop="dateModified" datetime="2018-09-04T00:00:00+08:00">2018-09-04</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2018/hexo-1/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2018/hexo-1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Mac 使用 Hexo 搭建个人博客，文中但凡用到相对路径 <code>./</code> 均代表博客的根目录。<br>官方文档：<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">文档 | Hexo</a>  </p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>Mac OS 下安装 <code>git</code> <code>node.js</code> <code>hexo</code>  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">brew install git</span><br><span class="line">brew install node</span><br><span class="line">sudo npm i -g npm</span><br><span class="line">sudo npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/hexo-1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://archcst.me/2018/spacemacs-org-readme-cn/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="ArchCST">
+      <meta itemprop="description" content="待得秋来九月八，<br>我花开时百花杀。<br>冲天香阵透长安，<br>满城尽带黄金甲。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ArchCST's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/spacemacs-org-readme-cn/" class="post-title-link" itemprop="url">Spacemacs Org-mode 快捷键中文说明书</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-09-01 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-01T00:00:00+08:00">2018-09-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-09-16 00:00:00" itemprop="dateModified" datetime="2018-09-16T00:00:00+08:00">2018-09-16</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2018/spacemacs-org-readme-cn/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2018/spacemacs-org-readme-cn/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>复制至 Spacemacs org-layer 的 README，翻译了快捷键部分  </p>
+<p>从 emacs 迁移到 spacemacs，用 evil 模式也用了一段时间了，对于在 evil 模式下 org-mode 快捷键一直一知半解，所以把 README 拿出来全方位的过一遍，顺便看看还有哪些好用的功能没用上。<br>一边试每一个快捷键一边翻译， 时间关系，不太常用的或者只靠试键搞不懂用处的暂时先不翻了，以后有空再继续，希望不要烂尾。<br>spacemacs 里就有原文，在这里能找到（需要先安装 spacemacs）：  </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/spacemacs-org-readme-cn/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+  </div>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ArchCST"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">ArchCST</p>
+  <div class="site-description" itemprop="description">待得秋来九月八，<br>我花开时百花杀。<br>冲天香阵透长安，<br>满城尽带黄金甲。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ArchCST" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ArchCST" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://t.me/archcst" title="Telegram → http:&#x2F;&#x2F;t.me&#x2F;archcst" rel="noopener" target="_blank"><i class="fa fa-fw fa-telegram"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-motorcycle"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ArchCST</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: 'fRdrw3LASBz5hfs31n0aFQ9k-gzGzoHsz',
+      appKey: '60YcTNfvxGk5yGkkc8o1WhI7',
+      placeholder: "ヾﾉ≧∀≦)o 不服来战!",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: false,
+      lang: '' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/uploads/favicon/safari-pinned-tab.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Sarasa Mono SC,Lato,PingFang SC,Microsoft YaHei,sans-serif;:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://archcst.me').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="学习资料：《TCP&#x2F;IP详解卷1：协议》   上网的基本要素一台计算机连接到英特网，需要下面 四个基本要素 ： IP 地址 、 子网掩码 、 DNS 服务器 IP 和 路由器 IP（默认网关） 。与同一子网通讯，有 IP 地址 和 子网掩码 就可以了，系统会通过这两个要素自动算出 广播地址，在上一篇中有说明。与本地之外的系统通讯需要一个路由或转发表，以确定到达不同目的地的路由器。这个路由或转发表就">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP&#x2F;IP 学习笔记：DHCP 动态主机配置协议">
+<meta property="og:url" content="http://archcst.me/2018/tcpip-3/index.html">
+<meta property="og:site_name" content="ArchCST&#39;s Blog">
+<meta property="og:description" content="学习资料：《TCP&#x2F;IP详解卷1：协议》   上网的基本要素一台计算机连接到英特网，需要下面 四个基本要素 ： IP 地址 、 子网掩码 、 DNS 服务器 IP 和 路由器 IP（默认网关） 。与同一子网通讯，有 IP 地址 和 子网掩码 就可以了，系统会通过这两个要素自动算出 广播地址，在上一篇中有说明。与本地之外的系统通讯需要一个路由或转发表，以确定到达不同目的地的路由器。这个路由或转发表就">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-12-16T16:00:00.000Z">
+<meta property="article:modified_time" content="2019-12-23T05:30:03.018Z">
+<meta property="article:author" content="ArchCST">
+<meta property="article:tag" content="learn">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://archcst.me/2018/tcpip-3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>TCP/IP 学习笔记：DHCP 动态主机配置协议 | ArchCST's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta custom-logo">
+      <div class="site-meta-headline">
+        <a>
+          <img class="custom-logo-image" src="/uploads/logo.png" alt="ArchCST's Blog">
+        </a>
+      </div>
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ArchCST's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-java">
+
+    <a href="/tags/java/" rel="section"><i class="fa fa-fw fa-coffee"></i>爪哇</a>
+
+  </li>
+        <li class="menu-item menu-item-learn">
+
+    <a href="/tags/learn/" rel="section"><i class="fa fa-fw fa-mortar-board"></i>学海</a>
+
+  </li>
+        <li class="menu-item menu-item-zen">
+
+    <a href="/tags/zen/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>心法</a>
+
+  </li>
+        <li class="menu-item menu-item-cheatsheet">
+
+    <a href="/tags/cheatsheet/" rel="section"><i class="fa fa-fw fa-pencil-square"></i>小抄</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://archcst.me/2018/tcpip-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="ArchCST">
+      <meta itemprop="description" content="待得秋来九月八，<br>我花开时百花杀。<br>冲天香阵透长安，<br>满城尽带黄金甲。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ArchCST's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          TCP/IP 学习笔记：DHCP 动态主机配置协议
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-12-17 00:00:00" itemprop="dateCreated datePublished" datetime="2018-12-17T00:00:00+08:00">2018-12-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-23 13:30:03" itemprop="dateModified" datetime="2019-12-23T13:30:03+08:00">2019-12-23</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2018/tcpip-3/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2018/tcpip-3/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>学习资料：《TCP/IP详解卷1：协议》  </p>
+<h1 id="上网的基本要素"><a href="#上网的基本要素" class="headerlink" title="上网的基本要素"></a>上网的基本要素</h1><p>一台计算机连接到英特网，需要下面 <code>四个基本要素</code> ： <code>IP 地址</code> 、 <code>子网掩码</code> 、 <code>DNS 服务器 IP</code> 和 <code>路由器 IP（默认网关）</code> 。<br>与同一子网通讯，有 <code>IP 地址</code> 和 <code>子网掩码</code> 就可以了，系统会通过这两个要素自动算出 <code>广播地址</code>，在上一篇中有说明。<br>与本地之外的系统通讯需要一个路由或转发表，以确定到达不同目的地的路由器。这个路由或转发表就是由 <code>默认网关</code> 负责的。<br>DNS 用于将用户可理解的 <code>域名</code> 映射为底层协议所需的 <code>IP 地址</code>。  </p>
+<a id="more"></a>
+
+<p>在现代企业中，服务器和路由器通常通过手工配置，而客户端则是使用 DHCP 动态主机配置自动配置。  </p>
+<h1 id="什么是-DCHP"><a href="#什么是-DCHP" class="headerlink" title="什么是 DCHP"></a>什么是 DCHP</h1><p>DHCP 是一种流行的客户机/服务器协议，用于为主机指定配置信息，在企业和家庭网络中广泛使用。现在几乎所有的路由器都配置了嵌入式 <code>DHCP 服务器</code> ，而几乎所有常用的客户端操作系统和大量的嵌入式设备（例如网络打印机和 VoIP 电话等）都支持 <code>DHCP 客户机</code>。  </p>
+<p>这些设备通过 DHCP 服务器获取 IP 地址、子网掩码、默认网关和 DNS。DHCP 也支持其他服务的相关信息（例如 SIP 服务器）也可以通过 DHCP 传输。  </p>
+<p>DHCP 协议的传输过程使用的是 UDP/IP。  </p>
+<h1 id="DHCP-地址池和租用期"><a href="#DHCP-地址池和租用期" class="headerlink" title="DHCP 地址池和租用期"></a>DHCP 地址池和租用期</h1><p>DHCP 有三种地址分配方法，自动分配、动态分配和手动分配。最常见的是动态分配。  </p>
+<p>动态分配中， DHCP 客户机请求分配一个 IP 地址，服务器从可用的 <code>地址池</code> 中选择一个地址作为响应。这个池是专门用来分配给客户机的一个连续的 IP 段。池内的某个 IP 分配给客户机后，这个 IP 只在一段特定的时间内有效，称之为 <code>租用期</code> ，客户机可以使用这个 IP 直到租用期过期，如果还要继续使用，客户机可以提出延长租用期的要求，称为 <code>续订租约</code> 。客户机在租用期 <strong>过半</strong> 时开始尝试续租。  </p>
+<p>租用期可以设置，而且是一个重要的配置参数。租用期的范围可以从几分钟到几天（一般不设置“无限”）。找到租用期最佳的数值需要对客户机数量、地址池大小和地址稳定性因素做出权衡。  </p>
+<p>一般来说，租用期长可以提供更稳定的地址和减少续租请求（降低网络开销），但地址池可能会因为释放不及时导致很快用完。  </p>
+<p>租用期短则相反，可以提供更灵活的地址池，但稳定性减小，网络流量负荷增大。常见的默认值是 12 ~ 24 小时。  </p>
+<p>服务器分配给客户机的四要素和其他信息，以及租用期，都会储存在持久性储存器（非易失性内存或硬盘）中，如果 DHCP 服务器重启后运行良好，租约将保持完好。  </p>
+<h1 id="DHCP-过程"><a href="#DHCP-过程" class="headerlink" title="DHCP 过程"></a>DHCP 过程</h1><p>一个<strong>并没有配置过</strong>的客户机通过 DHCP 服务器获取“四要素”的过程如下：  </p>
+<ol>
+<li>客户机发出一个 DHCP 请求广播（DHCPDISCOVER），从 <code>0.0.0.0:68</code> 发送到 <code>255.255.255.255:67</code></li>
+<li>收到这个广播的每个 DHCP 服务器都将响应一个 DHCPOFFER 消息，这个消息包含：  <ol>
+<li>提供给该客户机的 IP 地址</li>
+<li>DNS 服务器的 IP 地址</li>
+<li>子网掩码</li>
+<li>租用时间和重新绑定时间，上面已经过，重新绑定时间一般等于租用时间除以 2。</li>
+<li>一些其他的选项或服务</li>
+</ol>
+</li>
+<li>当接收到多台 DHCP 服务器的 DHCPOFFER 之后，客户机选择一个其中的一个，广播一个 DHCPREQUEST 消息通知所有 DHCP 服务器。这个 DHCPREQUEST 包含以下内容：  <ol>
+<li>选定的 IP，并将这个 IP 作为 DHCPREQUEST 消息的发送方 IP。</li>
+<li>提供这个 IP 的 <code>DHCP 服务器的标识符</code> 。</li>
+</ol>
+</li>
+<li>与这个标识符相同的 DHCP 服务器将确定这个 IP 是否依旧可以使用，然后绑定 DHCPREQUEST 中的 IP 地址，绑定后该 DHCP 服务器将响应一个 DHCPACK 消息，通知客户机现在可使用该 IP 了。如果发现这个 IP 不能使用（例如已经分配出去了），那么会服务器会发送 DHCPNAK 消息，客户机收到消息后 <code>重试</code> 。其他的 DHCP 服务器发现这个标识符与自己的标识符不同，则清除该请求相关的状态（释放）。</li>
+<li>客户机收到 DHCPACK 之后，也会探测网络以确保获得的这个地址未被使用（例如向该 IP 发送一个 ARP）。如果发现已经被使用了，客户机就不能使用这个地址，会发送一个 DHCPDECLINE 消息告知服务器这个地址我不能使用。然后经过默认的 <code>10 秒</code> 延迟后，客户机将 <code>重试</code> 。</li>
+</ol>
+<p>如果客户机已经有了一个 IP 地址，仅仅希望通过 DHCP 实现续租，该客户机可能跳过 DHCPDISOCVER/DHCPOFFER 阶段，直接发起 DHCPREQUEST 消息请求当前正在使用的 IP 地址。  </p>
+<h1 id="DHCP-Snooping"><a href="#DHCP-Snooping" class="headerlink" title="DHCP Snooping"></a>DHCP Snooping</h1><p>可以用来作为 DHCP 服务器的设备有很多，Windows Server、Linux、IP分享器、虚拟机等都可以作为 DHCP 服务器。另外私接路由器也是普遍会出现的问题。简单的说，DHCP Snooping 的重要作用就是防止局域网内私接路由器（非法 DHCP 服务器）导致的 IP 地址冲突和 ARP 污染。  </p>
+<p>DHCP Snooping 技术是 DHCP 安全特性，当交换机开启了 DHCP-Snooping后，会对DHCP报文进行侦听，并可以从接收到的 DHCPREQUEST 或 DHCPACK 报文中提取并记录 IP 地址和 MAC 地址信息。另外，DHCP-Snooping 允许将某个物理端口设置为信任端口或不信任端口。信任端口可以正常接收并转发 DHCPOFFER 报文，而不信任端口会将接收到的 DHCPOFFER 报文丢弃。这样，可以完成交换机对假冒 DHCP 服务器的屏蔽作用，确保客户端从合法的 DHCP 服务器获取 IP 地址。  </p>
+<p>在 Cisco 交换机上，可以通过如下命令配置 DHCP Snooping：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">switch(config)# ip dhcp snooping</span><br><span class="line"></span><br><span class="line">&#x2F;*在Vlan10启用dhcp snooping</span><br><span class="line">switch(config)# ip dhcp snooping vlan 10</span><br><span class="line"></span><br><span class="line">&#x2F;*dhcp包的转发速率，超过后接口就shutdown，默认不限制;</span><br><span class="line">switch(config-if)# ip dhcp snooping limit rate 10</span><br><span class="line"></span><br><span class="line">&#x2F;*这样这个端口就变成了信任端口，信任端口可以正常接收并转发DHCP Offer报文，不记录ip和mac地址的绑定，默认是非信任端口</span><br><span class="line">switch(config-if)# ip dhcp snooping trust</span><br><span class="line"></span><br><span class="line">&#x2F;*这样可以静态ip和mac一个绑定；</span><br><span class="line">switch# ip dhcp snooping binding 0009.3452.3ea4 vlan 7 192.168.10.5 interface gi1&#x2F;0&#x2F;10</span><br><span class="line"></span><br><span class="line">&#x2F;*显示DHCP探测状态*&#x2F;</span><br><span class="line">switch# show ip dhcp snooping</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ArchCST
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://archcst.me/2018/tcpip-3/" title="TCP&#x2F;IP 学习笔记：DHCP 动态主机配置协议">http://archcst.me/2018/tcpip-3/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/learn/" rel="tag"># learn</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/tcpip-2/" rel="prev" title="TCP/IP 学习笔记：ARP 地址协议">
+      <i class="fa fa-chevron-left"></i> TCP/IP 学习笔记：ARP 地址协议
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/ccna-caskd-config/" rel="next" title="实现部分 vlan 互通，部分隔离">
+      实现部分 vlan 互通，部分隔离 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#上网的基本要素"><span class="nav-number">1.</span> <span class="nav-text">上网的基本要素</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是-DCHP"><span class="nav-number">2.</span> <span class="nav-text">什么是 DCHP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DHCP-地址池和租用期"><span class="nav-number">3.</span> <span class="nav-text">DHCP 地址池和租用期</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DHCP-过程"><span class="nav-number">4.</span> <span class="nav-text">DHCP 过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DHCP-Snooping"><span class="nav-number">5.</span> <span class="nav-text">DHCP Snooping</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ArchCST"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">ArchCST</p>
+  <div class="site-description" itemprop="description">待得秋来九月八，<br>我花开时百花杀。<br>冲天香阵透长安，<br>满城尽带黄金甲。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ArchCST" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ArchCST" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://t.me/archcst" title="Telegram → http:&#x2F;&#x2F;t.me&#x2F;archcst" rel="noopener" target="_blank"><i class="fa fa-fw fa-telegram"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-motorcycle"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ArchCST</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: 'fRdrw3LASBz5hfs31n0aFQ9k-gzGzoHsz',
+      appKey: '60YcTNfvxGk5yGkkc8o1WhI7',
+      placeholder: "ヾﾉ≧∀≦)o 不服来战!",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: false,
+      lang: '' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/uploads/favicon/safari-pinned-tab.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Sarasa Mono SC,Lato,PingFang SC,Microsoft YaHei,sans-serif;:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://archcst.me').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="复制至 Spacemacs org-layer 的 README，翻译了快捷键部分   从 emacs 迁移到 spacemacs，用 evil 模式也用了一段时间了，对于在 evil 模式下 org-mode 快捷键一直一知半解，所以把 README 拿出来全方位的过一遍，顺便看看还有哪些好用的功能没用上。一边试每一个快捷键一边翻译， 时间关系，不太常用的或者只靠试键搞不懂用处的暂时先不翻了，以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spacemacs Org-mode 快捷键中文说明书">
+<meta property="og:url" content="http://archcst.me/2018/spacemacs-org-readme-cn/index.html">
+<meta property="og:site_name" content="ArchCST&#39;s Blog">
+<meta property="og:description" content="复制至 Spacemacs org-layer 的 README，翻译了快捷键部分   从 emacs 迁移到 spacemacs，用 evil 模式也用了一段时间了，对于在 evil 模式下 org-mode 快捷键一直一知半解，所以把 README 拿出来全方位的过一遍，顺便看看还有哪些好用的功能没用上。一边试每一个快捷键一边翻译， 时间关系，不太常用的或者只靠试键搞不懂用处的暂时先不翻了，以">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-08-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2018-09-15T16:00:00.000Z">
+<meta property="article:author" content="ArchCST">
+<meta property="article:tag" content="learn">
+<meta property="article:tag" content="emacs">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://archcst.me/2018/spacemacs-org-readme-cn/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Spacemacs Org-mode 快捷键中文说明书 | ArchCST's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta custom-logo">
+      <div class="site-meta-headline">
+        <a>
+          <img class="custom-logo-image" src="/uploads/logo.png" alt="ArchCST's Blog">
+        </a>
+      </div>
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ArchCST's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-java">
+
+    <a href="/tags/java/" rel="section"><i class="fa fa-fw fa-coffee"></i>爪哇</a>
+
+  </li>
+        <li class="menu-item menu-item-learn">
+
+    <a href="/tags/learn/" rel="section"><i class="fa fa-fw fa-mortar-board"></i>学海</a>
+
+  </li>
+        <li class="menu-item menu-item-zen">
+
+    <a href="/tags/zen/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>心法</a>
+
+  </li>
+        <li class="menu-item menu-item-cheatsheet">
+
+    <a href="/tags/cheatsheet/" rel="section"><i class="fa fa-fw fa-pencil-square"></i>小抄</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://archcst.me/2018/spacemacs-org-readme-cn/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="ArchCST">
+      <meta itemprop="description" content="待得秋来九月八，<br>我花开时百花杀。<br>冲天香阵透长安，<br>满城尽带黄金甲。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ArchCST's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spacemacs Org-mode 快捷键中文说明书
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-09-01 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-01T00:00:00+08:00">2018-09-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-09-16 00:00:00" itemprop="dateModified" datetime="2018-09-16T00:00:00+08:00">2018-09-16</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2018/spacemacs-org-readme-cn/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2018/spacemacs-org-readme-cn/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>复制至 Spacemacs org-layer 的 README，翻译了快捷键部分  </p>
+<p>从 emacs 迁移到 spacemacs，用 evil 模式也用了一段时间了，对于在 evil 模式下 org-mode 快捷键一直一知半解，所以把 README 拿出来全方位的过一遍，顺便看看还有哪些好用的功能没用上。<br>一边试每一个快捷键一边翻译， 时间关系，不太常用的或者只靠试键搞不懂用处的暂时先不翻了，以后有空再继续，希望不要烂尾。<br>spacemacs 里就有原文，在这里能找到（需要先安装 spacemacs）：  </p>
+<a id="more"></a>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/.emacs.d/layers/+emacs/org/README.ORG</span><br></pre></td></tr></table></figure>
+
+<!-- more -->
+
+<h1 id="按键绑定-Key-bindings"><a href="#按键绑定-Key-bindings" class="headerlink" title="按键绑定 Key bindings"></a>按键绑定 Key bindings</h1><h2 id="开始使用-org-mode"><a href="#开始使用-org-mode" class="headerlink" title="开始使用 org-mode"></a>开始使用 org-mode</h2><table>
+<thead>
+<tr>
+<th>按键绑定</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>SPC a o #</code></td>
+<td>org agenda list stuck projects</td>
+</tr>
+<tr>
+<td><code>SPC a o /</code></td>
+<td>org occur in agenda files</td>
+</tr>
+<tr>
+<td><code>SPC a o a</code></td>
+<td>日程列表 org agenda list</td>
+</tr>
+<tr>
+<td><code>SPC a o c</code></td>
+<td>快速创建项 org capture</td>
+</tr>
+<tr>
+<td><code>SPC a o e</code></td>
+<td>org store agenda views</td>
+</tr>
+<tr>
+<td><code>SPC a o f i</code></td>
+<td>org feed goto inbox</td>
+</tr>
+<tr>
+<td><code>SPC a o f u</code></td>
+<td>org feed update all</td>
+</tr>
+<tr>
+<td><code>SPC a o k g</code></td>
+<td>进入最后一次始计时的项</td>
+</tr>
+<tr>
+<td><code>SPC a o k i</code></td>
+<td>继续计时之前最后一次停止的项 org clock in last</td>
+</tr>
+<tr>
+<td><code>SPC a o k j</code></td>
+<td>进入当前开始计时的项 org jump to current clock</td>
+</tr>
+<tr>
+<td><code>SPC a o k o</code></td>
+<td>停止当前计时 org clock out</td>
+</tr>
+<tr>
+<td><code>SPC a o k r</code></td>
+<td>org resolve clocks</td>
+</tr>
+<tr>
+<td><code>SPC a o l</code></td>
+<td>org store link</td>
+</tr>
+<tr>
+<td><code>SPC a o m</code></td>
+<td>以标签进行搜索 org tags view</td>
+</tr>
+<tr>
+<td><code>SPC a o o</code></td>
+<td>日程列表选单 org agenda</td>
+</tr>
+<tr>
+<td><code>SPC a o s</code></td>
+<td>正则搜索 org search view</td>
+</tr>
+<tr>
+<td><code>SPC a o t</code></td>
+<td>显示所有剩余的 TODO 项 org todo list</td>
+</tr>
+<tr>
+<td><code>SPC C c</code></td>
+<td>快速创建项 org-capture</td>
+</tr>
+</tbody></table>
+<h2 id="开关-Toggles"><a href="#开关-Toggles" class="headerlink" title="开关 Toggles"></a>开关 Toggles</h2><table>
+<thead>
+<tr>
+<th>按键绑定</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>SPC m T c</code></td>
+<td>改变当前项 checkbox 的勾选状态 org-toggle-checkbox</td>
+</tr>
+<tr>
+<td><code>SPC m T e</code></td>
+<td>org-toggle-pretty-entities</td>
+</tr>
+<tr>
+<td><code>SPC m T i</code></td>
+<td>org-toggle-inline-images</td>
+</tr>
+<tr>
+<td><code>SPC m T l</code></td>
+<td>显示当前文件所有超链接的地址 org-toggle-link-display</td>
+</tr>
+<tr>
+<td><code>SPC m T t</code></td>
+<td>显示当前文件所有 TOTO 项 org-show-todo-tree</td>
+</tr>
+<tr>
+<td><code>SPC m T T</code></td>
+<td>切换 TODO 的状态 org-todo</td>
+</tr>
+<tr>
+<td><code>SPC m T V</code></td>
+<td>切换当前文件到只读的阅读模式 toggle <code>space-doc-mode</code> a read-only view mode</td>
+</tr>
+<tr>
+<td><code>SPC m T x</code></td>
+<td>预览 latex org-preview-latex-fragment</td>
+</tr>
+</tbody></table>
+<h2 id="Org-mode"><a href="#Org-mode" class="headerlink" title="Org-mode"></a>Org-mode</h2><table>
+<thead>
+<tr>
+<th>按键绑定</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>SPC m &lt;dotspacemacs-major-mode-leader-key&gt;</code></td>
+<td>org-ctrl-c-ctrl-c</td>
+</tr>
+<tr>
+<td><code>SPC m *</code></td>
+<td>正文转标题，或标题转正文 org-ctrl-c-star</td>
+</tr>
+<tr>
+<td><code>SPC m RET</code></td>
+<td>org-ctrl-c-ret</td>
+</tr>
+<tr>
+<td><code>SPC m -</code></td>
+<td>修改列表项符号 org-ctrl-c-minus</td>
+</tr>
+<tr>
+<td><code>SPC m &#39;​</code></td>
+<td>org-edit-special</td>
+</tr>
+<tr>
+<td><code>SPC m a</code></td>
+<td>日程列表选单 org-agenda</td>
+</tr>
+<tr>
+<td><code>SPC m A</code></td>
+<td>插入附件 org-attach</td>
+</tr>
+<tr>
+<td><code>SPC m c</code></td>
+<td>快速录入 org-capture</td>
+</tr>
+<tr>
+<td><code>SPC m C c</code></td>
+<td>取消当前计时 org-clock-cancel</td>
+</tr>
+<tr>
+<td><code>SPC m C g</code></td>
+<td>重新计算计时 evil-org-recompute-clocks</td>
+</tr>
+<tr>
+<td><code>SPC m C i</code></td>
+<td>在当前项开始计时 org-clock-in</td>
+</tr>
+<tr>
+<td><code>SPC m C o</code></td>
+<td>结束当前计时 org-clock-out</td>
+</tr>
+<tr>
+<td><code>SPC m C r</code></td>
+<td>org-resolve-clocks</td>
+</tr>
+<tr>
+<td><code>SPC m d d</code></td>
+<td>为当前项添加截止时间 org-deadline</td>
+</tr>
+<tr>
+<td><code>SPC m d s</code></td>
+<td>为当前项添加排程时间 org-schedule</td>
+</tr>
+<tr>
+<td><code>SPC m d t</code></td>
+<td>为当前项添加时间戳 org-time-stamp</td>
+</tr>
+<tr>
+<td><code>SPC m d T</code></td>
+<td>为当前项添加未激活的时间戳 org-time-stamp-inactive</td>
+</tr>
+<tr>
+<td><code>SPC m e e</code></td>
+<td>导出当前文件 org-export-dispatch</td>
+</tr>
+<tr>
+<td><code>SPC m e m</code></td>
+<td>导出当前文件为一个 html 格式的 email 消息 send current buffer as HTML email message</td>
+</tr>
+<tr>
+<td><code>SPC m f i</code></td>
+<td>org-feed-goto-inbox</td>
+</tr>
+<tr>
+<td><code>SPC m f u</code></td>
+<td>org-feed-update-all</td>
+</tr>
+<tr>
+<td><code>SPC m l</code></td>
+<td>org-open-at-point</td>
+</tr>
+<tr>
+<td><code>SPC m L</code></td>
+<td>org-shiftright</td>
+</tr>
+<tr>
+<td><code>SPC m H</code></td>
+<td>org-shiftleft</td>
+</tr>
+<tr>
+<td><code>SPC m K</code></td>
+<td>org-shiftup</td>
+</tr>
+<tr>
+<td><code>SPC m J</code></td>
+<td>org-shiftdown</td>
+</tr>
+<tr>
+<td><code>SPC m C-S-l</code></td>
+<td>org-shiftcontrolright</td>
+</tr>
+<tr>
+<td><code>SPC m C-S-h</code></td>
+<td>org-shiftcontrolleft</td>
+</tr>
+<tr>
+<td><code>SPC m C-S-j</code></td>
+<td>org-shiftcontroldown</td>
+</tr>
+<tr>
+<td><code>SPC m C-S-k</code></td>
+<td>org-shiftcontrolup</td>
+</tr>
+<tr>
+<td><code>SPC s j</code></td>
+<td>跳到一个标题 spacemacs/jump-in-buffer (jump to a heading)</td>
+</tr>
+</tbody></table>
+<h2 id="Org-with-evil-org-mode"><a href="#Org-with-evil-org-mode" class="headerlink" title="Org with evil-org-mode"></a>Org with evil-org-mode</h2><p>Please see the <a href="https://github.com/Somelauw/evil-org-mode/blob/master/doc/keythemes.org" target="_blank" rel="noopener">evil-org documentation</a> for additional instructions on customizing<br><code>evil-org-mode</code>.  </p>
+<table>
+<thead>
+<tr>
+<th>按键绑定</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>gj</code> / <code>gk</code></td>
+<td>上一个/下一个标题 Next/previous element (heading)</td>
+</tr>
+<tr>
+<td><code>gh</code> / <code>gl</code></td>
+<td>上一级/下一级标题 Parent/child element (heading)</td>
+</tr>
+<tr>
+<td><code>gH</code></td>
+<td>当前项的顶级标题 Root heading</td>
+</tr>
+<tr>
+<td><code>ae</code></td>
+<td>Element text object</td>
+</tr>
+<tr>
+<td><code>ar</code></td>
+<td>Subtree text object</td>
+</tr>
+<tr>
+<td><code>M-j</code> / <code>M-k</code></td>
+<td>上下移动当前树，联动子树 Move heading</td>
+</tr>
+<tr>
+<td><code>M-h</code> / <code>M-l</code></td>
+<td>升降级当前树，不联动子树 Promote or demote heading</td>
+</tr>
+<tr>
+<td><code>M-J</code> / <code>M-K</code></td>
+<td>上下移动当前树，不联动子树 Move subtree</td>
+</tr>
+<tr>
+<td><code>M-H</code> / <code>M-L</code></td>
+<td>升降级当前树，联动子树 Promote or demote subtree</td>
+</tr>
+<tr>
+<td><code>&gt;&gt;</code> / <code>&lt;&lt;</code></td>
+<td>升降级当前树，不联动子树 Promote or demote heading</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>如果启用了 <code>org-want-todo-bindings</code> ，以下快捷键可用  </p>
+<table>
+<thead>
+<tr>
+<th>按键绑定s</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>t</code></td>
+<td>Cycle TODO state of current heading</td>
+</tr>
+<tr>
+<td><code>T</code></td>
+<td>Insert new TODO heading</td>
+</tr>
+<tr>
+<td><code>M-t</code></td>
+<td>Insert new TODO sub-heading</td>
+</tr>
+</tbody></table>
+<h2 id="Tables"><a href="#Tables" class="headerlink" title="Tables"></a>Tables</h2><table>
+<thead>
+<tr>
+<th>按键绑定</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>SPC m t a</code></td>
+<td>Align the table at point by aligning all vertical bars</td>
+</tr>
+<tr>
+<td><code>SPC m t b</code></td>
+<td>Blank the current table field or active region</td>
+</tr>
+<tr>
+<td><code>SPC m t c</code></td>
+<td>Convert from <code>org-mode</code> table to table.el and back</td>
+</tr>
+<tr>
+<td><code>SPC m t d c</code></td>
+<td>Delete a column from the table</td>
+</tr>
+<tr>
+<td><code>SPC m t d r</code></td>
+<td>Delete the current row or horizontal line from the table</td>
+</tr>
+<tr>
+<td><code>SPC m t e</code></td>
+<td>Replace the table field value at the cursor by the result of a calculation</td>
+</tr>
+<tr>
+<td><code>SPC m t E</code></td>
+<td>Export table to a file, with configurable format</td>
+</tr>
+<tr>
+<td><code>SPC m t h</code></td>
+<td>Go to the previous field in the table</td>
+</tr>
+<tr>
+<td><code>SPC m t H</code></td>
+<td>Move column to the left</td>
+</tr>
+<tr>
+<td><code>SPC m t i c</code></td>
+<td>Insert a new column into the table</td>
+</tr>
+<tr>
+<td><code>SPC m t i h</code></td>
+<td>Insert a horizontal-line below the current line into the table</td>
+</tr>
+<tr>
+<td><code>SPC m t i H</code></td>
+<td>Insert a hline and move to the row below that line</td>
+</tr>
+<tr>
+<td><code>SPC m t i r</code></td>
+<td>Insert a new row above the current line into the table</td>
+</tr>
+<tr>
+<td><code>SPC m t I</code></td>
+<td>Import a file as a table</td>
+</tr>
+<tr>
+<td><code>SPC m t j</code></td>
+<td>Go to the next row (same column) in the current table</td>
+</tr>
+<tr>
+<td><code>SPC m t J</code></td>
+<td>Move table row down</td>
+</tr>
+<tr>
+<td><code>SPC m t K</code></td>
+<td>Move table row up</td>
+</tr>
+<tr>
+<td><code>SPC m t l</code></td>
+<td>Go to the next field in the current table, creating new lines as needed</td>
+</tr>
+<tr>
+<td><code>SPC m t L</code></td>
+<td>Move column to the right</td>
+</tr>
+<tr>
+<td><code>SPC m t n</code></td>
+<td>Query for a size and insert a table skeleton</td>
+</tr>
+<tr>
+<td><code>SPC m t N</code></td>
+<td>Use the table.el package to insert a new table</td>
+</tr>
+<tr>
+<td><code>SPC m t p</code></td>
+<td>Plot the table using org-plot/gnuplot</td>
+</tr>
+<tr>
+<td><code>SPC m t r</code></td>
+<td>Recalculate the current table line by applying all stored formulas</td>
+</tr>
+<tr>
+<td><code>SPC m t s</code></td>
+<td>Sort table lines according to the column at point</td>
+</tr>
+<tr>
+<td><code>SPC m t t f</code></td>
+<td>Toggle the formula debugger in tables</td>
+</tr>
+<tr>
+<td><code>SPC m t t o</code></td>
+<td>Toggle the display of Row/Column numbers in tables</td>
+</tr>
+<tr>
+<td><code>SPC m t w</code></td>
+<td>Wrap several fields in a column like a paragraph</td>
+</tr>
+</tbody></table>
+<h2 id="Trees"><a href="#Trees" class="headerlink" title="Trees"></a>Trees</h2><table>
+<thead>
+<tr>
+<th>按键绑定</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>gj</code> / <code>gk</code></td>
+<td>Next/previous element (heading)</td>
+</tr>
+<tr>
+<td><code>gh</code> / <code>gl</code></td>
+<td>Parent/child element (heading)</td>
+</tr>
+<tr>
+<td><code>gH</code></td>
+<td>Root heading</td>
+</tr>
+<tr>
+<td><code>ae</code></td>
+<td>Element text object</td>
+</tr>
+<tr>
+<td><code>ar</code></td>
+<td>Subtree text object</td>
+</tr>
+<tr>
+<td><code>M-j</code> / <code>M-k</code></td>
+<td>Move heading</td>
+</tr>
+<tr>
+<td><code>M-h</code> / <code>M-l</code></td>
+<td>Promote or demote heading</td>
+</tr>
+<tr>
+<td><code>M-J</code> / <code>M-K</code></td>
+<td>Move subtree</td>
+</tr>
+<tr>
+<td><code>M-H</code> / <code>M-L</code></td>
+<td>Promote or demote subtree</td>
+</tr>
+<tr>
+<td><code>&gt;&gt;</code> / <code>&lt;&lt;</code></td>
+<td>Promote or demote heading</td>
+</tr>
+<tr>
+<td><code>TAB</code></td>
+<td>org-cycle</td>
+</tr>
+<tr>
+<td><code>SPC m s a</code></td>
+<td>Toggle archive tag for subtree</td>
+</tr>
+<tr>
+<td><code>SPC m s A</code></td>
+<td>Archive subtree</td>
+</tr>
+<tr>
+<td><code>SPC m s b</code></td>
+<td>org-tree-to-indirect-buffer</td>
+</tr>
+<tr>
+<td><code>SPC m s l</code></td>
+<td>org-demote-subtree</td>
+</tr>
+<tr>
+<td><code>SPC m s h</code></td>
+<td>org-promote-subtree</td>
+</tr>
+<tr>
+<td><code>SPC m s k</code></td>
+<td>org-move-subtree-up</td>
+</tr>
+<tr>
+<td><code>SPC m s j</code></td>
+<td>org-move-subtree-down</td>
+</tr>
+<tr>
+<td><code>SPC m s n</code></td>
+<td>org-narrow-to-subtree</td>
+</tr>
+<tr>
+<td><code>SPC m s N</code></td>
+<td>widen narrowed subtree</td>
+</tr>
+<tr>
+<td><code>SPC m s r</code></td>
+<td>org-refile</td>
+</tr>
+<tr>
+<td><code>SPC m s s</code></td>
+<td>show sparse tree</td>
+</tr>
+<tr>
+<td><code>SPC m s S</code></td>
+<td>sort trees</td>
+</tr>
+</tbody></table>
+<h2 id="Element-insertion"><a href="#Element-insertion" class="headerlink" title="Element insertion"></a>Element insertion</h2><table>
+<thead>
+<tr>
+<th>按键绑定</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>SPC m i d</code></td>
+<td>org-insert-drawer</td>
+</tr>
+<tr>
+<td><code>SPC m i D s</code></td>
+<td>Take screenshot</td>
+</tr>
+<tr>
+<td><code>SPC m i D y</code></td>
+<td>Yank image url</td>
+</tr>
+<tr>
+<td><code>SPC m i e</code></td>
+<td>org-set-effort</td>
+</tr>
+<tr>
+<td><code>SPC m i f</code></td>
+<td>org-insert-footnote</td>
+</tr>
+<tr>
+<td><code>SPC m i H</code></td>
+<td>当前标题或内容之后添加标题 org-insert-heading-after-current</td>
+</tr>
+<tr>
+<td><code>SPC m i h</code></td>
+<td>当前位置插入标题 org-insert-heading</td>
+</tr>
+<tr>
+<td><code>SPC m i K</code></td>
+<td>spacemacs/insert-keybinding-org</td>
+</tr>
+<tr>
+<td><code>SPC m i l</code></td>
+<td>插入链接 org-insert-link</td>
+</tr>
+<tr>
+<td><code>SPC m i n</code></td>
+<td>插入笔记 org-add-note</td>
+</tr>
+<tr>
+<td><code>SPC m i p</code></td>
+<td>插入属性 org-set-property</td>
+</tr>
+<tr>
+<td><code>SPC m i s</code></td>
+<td>添加父级树 org-insert-subheading</td>
+</tr>
+<tr>
+<td><code>SPC m i t</code></td>
+<td>添加标签 org-set-tags</td>
+</tr>
+</tbody></table>
+<h2 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h2><table>
+<thead>
+<tr>
+<th>按键绑定</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>SPC m x o</code></td>
+<td>org-open-at-point</td>
+</tr>
+</tbody></table>
+<h2 id="Babel-Source-Blocks"><a href="#Babel-Source-Blocks" class="headerlink" title="Babel / Source Blocks"></a>Babel / Source Blocks</h2><table>
+<thead>
+<tr>
+<th>按键绑定</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>SPC m b .</code></td>
+<td>Enter Babel Transient State</td>
+</tr>
+<tr>
+<td><code>SPC m b a</code></td>
+<td>org-babel-sha1-hash</td>
+</tr>
+<tr>
+<td><code>SPC m b b</code></td>
+<td>org-babel-execute-buffer</td>
+</tr>
+<tr>
+<td><code>SPC m b c</code></td>
+<td>org-babel-check-src-block</td>
+</tr>
+<tr>
+<td><code>SPC m b d</code></td>
+<td>org-babel-demarcate-block</td>
+</tr>
+<tr>
+<td><code>SPC m b e</code></td>
+<td>org-babel-execute-maybe</td>
+</tr>
+<tr>
+<td><code>SPC m b f</code></td>
+<td>org-babel-tangle-file</td>
+</tr>
+<tr>
+<td><code>SPC m b g</code></td>
+<td>org-babel-goto-named-src-block</td>
+</tr>
+<tr>
+<td><code>SPC m b i</code></td>
+<td>org-babel-lob-ingest</td>
+</tr>
+<tr>
+<td><code>SPC m b I</code></td>
+<td>org-babel-view-src-block-info</td>
+</tr>
+<tr>
+<td><code>SPC m b j</code></td>
+<td>org-babel-insert-header-arg</td>
+</tr>
+<tr>
+<td><code>SPC m b l</code></td>
+<td>org-babel-load-in-session</td>
+</tr>
+<tr>
+<td><code>SPC m b n</code></td>
+<td>org-babel-next-src-block</td>
+</tr>
+<tr>
+<td><code>SPC m b o</code></td>
+<td>org-babel-open-src-block-result</td>
+</tr>
+<tr>
+<td><code>SPC m b p</code></td>
+<td>org-babel-previous-src-block</td>
+</tr>
+<tr>
+<td><code>SPC m b r</code></td>
+<td>org-babel-goto-named-result</td>
+</tr>
+<tr>
+<td><code>SPC m b s</code></td>
+<td>org-babel-execute-subtree</td>
+</tr>
+<tr>
+<td><code>SPC m b t</code></td>
+<td>org-babel-tangle</td>
+</tr>
+<tr>
+<td><code>SPC m b u</code></td>
+<td>org-babel-goto-src-block-head</td>
+</tr>
+<tr>
+<td><code>SPC m b v</code></td>
+<td>org-babel-expand-src-block</td>
+</tr>
+<tr>
+<td><code>SPC m b x</code></td>
+<td>org-babel-do-key-sequence-in-edit-buffer</td>
+</tr>
+<tr>
+<td><code>SPC m b z</code></td>
+<td>org-babel-switch-to-session</td>
+</tr>
+<tr>
+<td><code>SPC m b Z</code></td>
+<td>org-babel-switch-to-session-with-code</td>
+</tr>
+</tbody></table>
+<h3 id="Org-Babel-Transient-State"><a href="#Org-Babel-Transient-State" class="headerlink" title="Org Babel Transient State"></a>Org Babel Transient State</h3><p>Use <code>SPC m b .</code> to enter a transient state for quick source block navigation and<br>execution.  During that state, the following bindings are active:  </p>
+<table>
+<thead>
+<tr>
+<th>按键绑定</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><del>‘</del></td>
+<td>edit source block</td>
+</tr>
+<tr>
+<td><code>e</code></td>
+<td>execute source block</td>
+</tr>
+<tr>
+<td><code>g</code></td>
+<td>jump to named source block</td>
+</tr>
+<tr>
+<td><code>j</code></td>
+<td>jump to next source block</td>
+</tr>
+<tr>
+<td><code>k</code></td>
+<td>jump to previous source block</td>
+</tr>
+<tr>
+<td><code>q</code></td>
+<td>leave transient state</td>
+</tr>
+</tbody></table>
+<h2 id="强调-Emphasis"><a href="#强调-Emphasis" class="headerlink" title="强调 Emphasis"></a>强调 Emphasis</h2><table>
+<thead>
+<tr>
+<th>按键绑定</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>SPC m x b</code></td>
+<td><strong>选中文本加粗</strong> make region bold</td>
+</tr>
+<tr>
+<td><code>SPC m x c</code></td>
+<td><code>选中文本转换为行内代码</code> make region code</td>
+</tr>
+<tr>
+<td><code>SPC m x i</code></td>
+<td><em>选中文本转换为斜体</em> make region italic</td>
+</tr>
+<tr>
+<td><code>SPC m x r</code></td>
+<td>清空选中文本的格式 clear region emphasis</td>
+</tr>
+<tr>
+<td><code>SPC m x s</code></td>
+<td><del>选中文本添加删除线</del> make region strike-through</td>
+</tr>
+<tr>
+<td><code>SPC m x u</code></td>
+<td><span class="underline">选中文本添加下划线</span> make region underline</td>
+</tr>
+<tr>
+<td><code>SPC m x v</code></td>
+<td><code>选中文本高亮</code></td>
+</tr>
+</tbody></table>
+<h2 id="日历中的操作-Navigating-in-calendar"><a href="#日历中的操作-Navigating-in-calendar" class="headerlink" title="日历中的操作 Navigating in calendar"></a>日历中的操作 Navigating in calendar</h2><table>
+<thead>
+<tr>
+<th>按键绑定</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>M-l</code></td>
+<td>右移一天</td>
+</tr>
+<tr>
+<td><code>M-h</code></td>
+<td>左移一天</td>
+</tr>
+<tr>
+<td><code>M-j</code></td>
+<td>上移一天</td>
+</tr>
+<tr>
+<td><code>M-k</code></td>
+<td>下移一天</td>
+</tr>
+<tr>
+<td><code>M-L</code></td>
+<td>右移一月</td>
+</tr>
+<tr>
+<td><code>M-H</code></td>
+<td>左移一月</td>
+</tr>
+<tr>
+<td><code>M-J</code></td>
+<td>上一年</td>
+</tr>
+<tr>
+<td><code>M-K</code></td>
+<td>下一年</td>
+</tr>
+</tbody></table>
+<h2 id="Capture-buffers-and-src-blocks"><a href="#Capture-buffers-and-src-blocks" class="headerlink" title="Capture buffers and src blocks"></a>Capture buffers and src blocks</h2><p><code>org-capture-mode</code> and <code>org-src-mode</code> both support the confirm and abort<br>conventions.  </p>
+<table>
+<thead>
+<tr>
+<th>按键绑定</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>SPC m &lt;dotspacemacs-major-mode-leader-key&gt;</code></td>
+<td>confirm in <code>org-capture-mode</code></td>
+</tr>
+<tr>
+<td><code>SPC m &#39;​</code></td>
+<td>confirm in <code>org-src-mode</code></td>
+</tr>
+<tr>
+<td><code>SPC m c</code></td>
+<td>confirm</td>
+</tr>
+<tr>
+<td><code>SPC m a</code></td>
+<td>abort</td>
+</tr>
+<tr>
+<td><code>SPC m k</code></td>
+<td>abort</td>
+</tr>
+<tr>
+<td><code>SPC m r</code></td>
+<td>org-capture-refile in org-capture-mode</td>
+</tr>
+</tbody></table>
+<h2 id="Org-agenda"><a href="#Org-agenda" class="headerlink" title="Org agenda"></a>Org agenda</h2><h3 id="Keybindings"><a href="#Keybindings" class="headerlink" title="Keybindings"></a>Keybindings</h3><p>The evilified org agenda supports the following bindings:  </p>
+<table>
+<thead>
+<tr>
+<th>按键绑定</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>M-SPC</code> or <code>s-M-SPC</code></td>
+<td>org-agenda transient state</td>
+</tr>
+<tr>
+<td><code>SPC m a</code></td>
+<td>org-agenda</td>
+</tr>
+<tr>
+<td><code>SPC m C c</code></td>
+<td>org-agenda-clock-cancel</td>
+</tr>
+<tr>
+<td><code>SPC m C i</code></td>
+<td>org-agenda-clock-in</td>
+</tr>
+<tr>
+<td><code>SPC m C o</code></td>
+<td>org-agenda-clock-out</td>
+</tr>
+<tr>
+<td><code>SPC m C p</code></td>
+<td>org-pomodoro (if package is used)</td>
+</tr>
+<tr>
+<td><code>SPC m d d</code></td>
+<td>org-agenda-deadline</td>
+</tr>
+<tr>
+<td><code>SPC m d s</code></td>
+<td>org-agenda-schedule</td>
+</tr>
+<tr>
+<td><code>SPC m i e</code></td>
+<td>org-agenda-set-effort</td>
+</tr>
+<tr>
+<td><code>SPC m i p</code></td>
+<td>org-agenda-set-property</td>
+</tr>
+<tr>
+<td><code>SPC m i t</code></td>
+<td>org-agenda-set-tags</td>
+</tr>
+<tr>
+<td><code>SPC m s r</code></td>
+<td>org-agenda-refile</td>
+</tr>
+<tr>
+<td><code>M-j</code></td>
+<td>next item</td>
+</tr>
+<tr>
+<td><code>M-k</code></td>
+<td>previous item</td>
+</tr>
+<tr>
+<td><code>M-h</code></td>
+<td>earlier view</td>
+</tr>
+<tr>
+<td><code>M-l</code></td>
+<td>later view</td>
+</tr>
+<tr>
+<td><code>gr</code></td>
+<td>refresh</td>
+</tr>
+<tr>
+<td><code>gd</code></td>
+<td>toggle grid</td>
+</tr>
+<tr>
+<td><code>C-v</code></td>
+<td>change view</td>
+</tr>
+<tr>
+<td><code>RET</code></td>
+<td>org-agenda-goto</td>
+</tr>
+<tr>
+<td><code>M-RET</code></td>
+<td>org-agenda-show-and-scroll-up</td>
+</tr>
+</tbody></table>
+<h3 id="Org-agenda-transient-state"><a href="#Org-agenda-transient-state" class="headerlink" title="Org agenda transient state"></a>Org agenda transient state</h3><p>Use <code>M-SPC</code> or <code>s-M-SPC</code> in an org agenda buffer to activate its transient state.<br>The transient state aims to list the most useful org agenda commands and<br>visually organize them by category. The commands associated with each binding<br>are listed bellow.  </p>
+<table>
+<thead>
+<tr>
+<th>Keybinding</th>
+<th>说明</th>
+<th>Command</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Entry</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>ht</code></td>
+<td>set status</td>
+<td>org-agenda-todo</td>
+</tr>
+<tr>
+<td><code>hk</code></td>
+<td>kill</td>
+<td>org-agenda-kill</td>
+</tr>
+<tr>
+<td><code>hR</code></td>
+<td>refile</td>
+<td>org-agenda-refile</td>
+</tr>
+<tr>
+<td><code>hA</code></td>
+<td>archive</td>
+<td>org-agenda-archive-default</td>
+</tr>
+<tr>
+<td><code>h:</code></td>
+<td>set tags</td>
+<td>org-agenda-set-tags</td>
+</tr>
+<tr>
+<td><code>hp</code></td>
+<td>set priority</td>
+<td>org-agenda-priority</td>
+</tr>
+<tr>
+<td>Visit entry</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>SPC</code></td>
+<td>in other window</td>
+<td>org-agenda-show-and-scroll-up</td>
+</tr>
+<tr>
+<td><code>TAB</code></td>
+<td>&amp; go to location</td>
+<td>org-agenda-goto</td>
+</tr>
+<tr>
+<td><code>RET</code></td>
+<td>&amp; del other windows</td>
+<td>org-agenda-switch-to</td>
+</tr>
+<tr>
+<td><code>o</code></td>
+<td>link</td>
+<td>link-hint-open-link</td>
+</tr>
+<tr>
+<td>Filter</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>ft</code></td>
+<td>by tag</td>
+<td>org-agenda-filter-by-tag</td>
+</tr>
+<tr>
+<td><code>fr</code></td>
+<td>refine by tag</td>
+<td>org-agenda-filter-by-tag-refine</td>
+</tr>
+<tr>
+<td><code>fc</code></td>
+<td>by category</td>
+<td>org-agenda-filter-by-category</td>
+</tr>
+<tr>
+<td><code>fh</code></td>
+<td>by top headline</td>
+<td>org-agenda-filter-by-top-headline</td>
+</tr>
+<tr>
+<td><code>fx</code></td>
+<td>by regexp</td>
+<td>org-agenda-filter-by-regexp</td>
+</tr>
+<tr>
+<td><code>fd</code></td>
+<td>delete all filters</td>
+<td>org-agenda-filter-remove-all</td>
+</tr>
+<tr>
+<td>Date</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>ds</code></td>
+<td>schedule</td>
+<td>org-agenda-schedule</td>
+</tr>
+<tr>
+<td><code>dS</code></td>
+<td>un-schedule</td>
+<td>org-agenda-schedule</td>
+</tr>
+<tr>
+<td><code>dd</code></td>
+<td>set deadline</td>
+<td>org-agenda-deadline</td>
+</tr>
+<tr>
+<td><code>dD</code></td>
+<td>remove deadline</td>
+<td>org-agenda-deadline</td>
+</tr>
+<tr>
+<td><code>dt</code></td>
+<td>timestamp</td>
+<td>org-agenda-date-prompt</td>
+</tr>
+<tr>
+<td><code>+</code></td>
+<td>do later</td>
+<td>org-agenda-do-date-later</td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>do earlier</td>
+<td>org-agenda-do-date-earlier</td>
+</tr>
+<tr>
+<td>Toggle</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>tf</code></td>
+<td>follow</td>
+<td>org-agenda-follow-mode</td>
+</tr>
+<tr>
+<td><code>tl</code></td>
+<td>log</td>
+<td>org-agenda-log-mode</td>
+</tr>
+<tr>
+<td><code>ta</code></td>
+<td>archive</td>
+<td>org-agenda-archives-mode</td>
+</tr>
+<tr>
+<td><code>tr</code></td>
+<td>clock report</td>
+<td>org-agenda-clockreport-mode</td>
+</tr>
+<tr>
+<td><code>td</code></td>
+<td>diaries</td>
+<td>org-agenda-toggle-diary</td>
+</tr>
+<tr>
+<td>View</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>vd</code></td>
+<td>day</td>
+<td>org-agenda-day-view</td>
+</tr>
+<tr>
+<td><code>vw</code></td>
+<td>week</td>
+<td>org-agenda-week-view</td>
+</tr>
+<tr>
+<td><code>vt</code></td>
+<td>fortnight</td>
+<td>org-agenda-fortnight-view</td>
+</tr>
+<tr>
+<td><code>vm</code></td>
+<td>month</td>
+<td>org-agenda-month-view</td>
+</tr>
+<tr>
+<td><code>vy</code></td>
+<td>year</td>
+<td>org-agenda-year-view</td>
+</tr>
+<tr>
+<td><code>vn</code></td>
+<td>next span</td>
+<td>org-agenda-later</td>
+</tr>
+<tr>
+<td><code>vp</code></td>
+<td>prev span</td>
+<td>org-agenda-earlier</td>
+</tr>
+<tr>
+<td><code>vr</code></td>
+<td>reset</td>
+<td>org-agenda-reset-view</td>
+</tr>
+<tr>
+<td>Clock</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>cI</code></td>
+<td>in</td>
+<td>org-agenda-clock-in</td>
+</tr>
+<tr>
+<td><code>cO</code></td>
+<td>out</td>
+<td>org-agenda-clock-out</td>
+</tr>
+<tr>
+<td><code>cq</code></td>
+<td>cancel</td>
+<td>org-agenda-clock-cancel</td>
+</tr>
+<tr>
+<td><code>cj</code></td>
+<td>jump</td>
+<td>org-agenda-clock-goto</td>
+</tr>
+<tr>
+<td>Other</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>gr</code></td>
+<td>reload</td>
+<td>org-agenda-redo</td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td>go to today</td>
+<td>org-agenda-goto-today</td>
+</tr>
+<tr>
+<td><code>gd</code></td>
+<td>go to date</td>
+<td>org-agenda-goto-date</td>
+</tr>
+</tbody></table>
+<h2 id="Pomodoro"><a href="#Pomodoro" class="headerlink" title="Pomodoro"></a>Pomodoro</h2><table>
+<thead>
+<tr>
+<th>按键绑定</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>SPC m C p</code></td>
+<td>starts a pomodoro</td>
+</tr>
+</tbody></table>
+<h2 id="Presentation"><a href="#Presentation" class="headerlink" title="Presentation"></a>Presentation</h2><p>org-present must be activated explicitly by typing: <code>SPC SPC org-present</code>  </p>
+<table>
+<thead>
+<tr>
+<th>按键绑定</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>h</code></td>
+<td>previous slide</td>
+</tr>
+<tr>
+<td><code>l</code></td>
+<td>next slide</td>
+</tr>
+<tr>
+<td><code>q</code></td>
+<td>quit</td>
+</tr>
+</tbody></table>
+<h2 id="Org-projectile"><a href="#Org-projectile" class="headerlink" title="Org-projectile"></a>Org-projectile</h2><table>
+<thead>
+<tr>
+<th>按键绑定</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>SPC a o p</code></td>
+<td>Capture a TODO for the current project</td>
+</tr>
+<tr>
+<td><code>SPC u SPC a o p</code></td>
+<td>Capture a TODO for any given project (choose from list)</td>
+</tr>
+<tr>
+<td><code>SPC p o</code></td>
+<td>Go to the TODOs for the current project</td>
+</tr>
+</tbody></table>
+<h2 id="Org-journal"><a href="#Org-journal" class="headerlink" title="Org-journal"></a>Org-journal</h2><table>
+<thead>
+<tr>
+<th>按键绑定</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>SPC a o j j</code></td>
+<td>New journal entry</td>
+</tr>
+<tr>
+<td><code>SPC a o j s</code></td>
+<td>Search journal entries</td>
+</tr>
+</tbody></table>
+<p>Journal entries are highlighted in the calendar. The following key bindings are<br>available for <code>calendar-mode</code> for navigating and manipulating the journal.  </p>
+<table>
+<thead>
+<tr>
+<th>按键绑定</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>SPC m r</code></td>
+<td>Read journal entry</td>
+</tr>
+<tr>
+<td><code>SPC m i</code></td>
+<td>Insert journal entry for date</td>
+</tr>
+<tr>
+<td><code>SPC m n</code></td>
+<td>Next journal entry</td>
+</tr>
+<tr>
+<td><code>SPC m p</code></td>
+<td>Previous journal entry</td>
+</tr>
+<tr>
+<td><code>SPC m s</code></td>
+<td>Search all journal entries</td>
+</tr>
+<tr>
+<td><code>SPC m w</code></td>
+<td>Search calendar week journal entries</td>
+</tr>
+<tr>
+<td><code>SPC m m</code></td>
+<td>Search calendar month journal entries</td>
+</tr>
+<tr>
+<td><code>SPC m y</code></td>
+<td>Search calendar year journal entries</td>
+</tr>
+</tbody></table>
+<p>While viewing a journal entry in <code>org-journal-mode</code> the following key bindings<br>are available.  </p>
+<table>
+<thead>
+<tr>
+<th>按键绑定</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>SPC m j</code></td>
+<td>New journal entry</td>
+</tr>
+<tr>
+<td><code>SPC m p</code></td>
+<td>Previous journal entry</td>
+</tr>
+<tr>
+<td><code>SPC m n</code></td>
+<td>Next journal entry</td>
+</tr>
+</tbody></table>
+<h2 id="Org-brain"><a href="#Org-brain" class="headerlink" title="Org-brain"></a>Org-brain</h2><h3 id="Application-bindings"><a href="#Application-bindings" class="headerlink" title="Application bindings"></a>Application bindings</h3><table>
+<thead>
+<tr>
+<th>按键绑定</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>SPC a o b</code></td>
+<td>Visualize an org-brain entry</td>
+</tr>
+</tbody></table>
+<h3 id="Visualization-bindings"><a href="#Visualization-bindings" class="headerlink" title="Visualization bindings"></a>Visualization bindings</h3><table>
+<thead>
+<tr>
+<th>按键绑定</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>j / TAB</code></td>
+<td>Goto next link</td>
+</tr>
+<tr>
+<td><code>k / S-TAB</code></td>
+<td>Goto previous link</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td>Add child</td>
+</tr>
+<tr>
+<td><code>p</code></td>
+<td>Add parent</td>
+</tr>
+<tr>
+<td><code>l</code></td>
+<td>Add resource link</td>
+</tr>
+<tr>
+<td><code>C-y</code></td>
+<td>Paste resource link</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td>Add resource <a href="http://orgmode.org/manual/Attachments.html" target="_blank" rel="noopener">attachment</a></td>
+</tr>
+<tr>
+<td><code>o</code></td>
+<td>Open and edit the visualized entry</td>
+</tr>
+<tr>
+<td><code>f</code></td>
+<td>Find/visit another entry to visualize</td>
+</tr>
+<tr>
+<td><code>r</code></td>
+<td>Rename this, or another, entry</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ArchCST
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://archcst.me/2018/spacemacs-org-readme-cn/" title="Spacemacs Org-mode 快捷键中文说明书">http://archcst.me/2018/spacemacs-org-readme-cn/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/learn/" rel="tag"># learn</a>
+              <a href="/tags/emacs/" rel="tag"># emacs</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2018/hexo-1/" rel="next" title="Hexo 静态博客搭建参考（一）：本地搭建">
+      Hexo 静态博客搭建参考（一）：本地搭建 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#按键绑定-Key-bindings"><span class="nav-number">1.</span> <span class="nav-text">按键绑定 Key bindings</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始使用-org-mode"><span class="nav-number">1.1.</span> <span class="nav-text">开始使用 org-mode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开关-Toggles"><span class="nav-number">1.2.</span> <span class="nav-text">开关 Toggles</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Org-mode"><span class="nav-number">1.3.</span> <span class="nav-text">Org-mode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Org-with-evil-org-mode"><span class="nav-number">1.4.</span> <span class="nav-text">Org with evil-org-mode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tables"><span class="nav-number">1.5.</span> <span class="nav-text">Tables</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Trees"><span class="nav-number">1.6.</span> <span class="nav-text">Trees</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Element-insertion"><span class="nav-number">1.7.</span> <span class="nav-text">Element insertion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Links"><span class="nav-number">1.8.</span> <span class="nav-text">Links</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Babel-Source-Blocks"><span class="nav-number">1.9.</span> <span class="nav-text">Babel &#x2F; Source Blocks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Org-Babel-Transient-State"><span class="nav-number">1.9.1.</span> <span class="nav-text">Org Babel Transient State</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强调-Emphasis"><span class="nav-number">1.10.</span> <span class="nav-text">强调 Emphasis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日历中的操作-Navigating-in-calendar"><span class="nav-number">1.11.</span> <span class="nav-text">日历中的操作 Navigating in calendar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Capture-buffers-and-src-blocks"><span class="nav-number">1.12.</span> <span class="nav-text">Capture buffers and src blocks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Org-agenda"><span class="nav-number">1.13.</span> <span class="nav-text">Org agenda</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Keybindings"><span class="nav-number">1.13.1.</span> <span class="nav-text">Keybindings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Org-agenda-transient-state"><span class="nav-number">1.13.2.</span> <span class="nav-text">Org agenda transient state</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pomodoro"><span class="nav-number">1.14.</span> <span class="nav-text">Pomodoro</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Presentation"><span class="nav-number">1.15.</span> <span class="nav-text">Presentation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Org-projectile"><span class="nav-number">1.16.</span> <span class="nav-text">Org-projectile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Org-journal"><span class="nav-number">1.17.</span> <span class="nav-text">Org-journal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Org-brain"><span class="nav-number">1.18.</span> <span class="nav-text">Org-brain</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Application-bindings"><span class="nav-number">1.18.1.</span> <span class="nav-text">Application bindings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Visualization-bindings"><span class="nav-number">1.18.2.</span> <span class="nav-text">Visualization bindings</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ArchCST"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">ArchCST</p>
+  <div class="site-description" itemprop="description">待得秋来九月八，<br>我花开时百花杀。<br>冲天香阵透长安，<br>满城尽带黄金甲。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ArchCST" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ArchCST" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://t.me/archcst" title="Telegram → http:&#x2F;&#x2F;t.me&#x2F;archcst" rel="noopener" target="_blank"><i class="fa fa-fw fa-telegram"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-motorcycle"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ArchCST</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: 'fRdrw3LASBz5hfs31n0aFQ9k-gzGzoHsz',
+      appKey: '60YcTNfvxGk5yGkkc8o1WhI7',
+      placeholder: "ヾﾉ≧∀≦)o 不服来战!",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: false,
+      lang: '' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

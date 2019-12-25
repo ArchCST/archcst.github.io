@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/uploads/favicon/safari-pinned-tab.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Sarasa Mono SC,Lato,PingFang SC,Microsoft YaHei,sans-serif;:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://archcst.me').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="学习资料：《TCP&#x2F;IP详解卷1：协议》   ARP 解决了什么问题ARP 协议工作于同一 IP 子网中，主要工作是把 逻辑 Internet 地址 向对应的 物理硬件地址 进行转换。也就是把 IP 转换为 MAC 地址。ARP 就是设计来查询一个 IP 所对应的 MAC 地址的。   ARP 广播假设子网 128.32.1.0&#x2F;24 中有一台主机 128.32.1.33 发送一个帧到另一台主机">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP&#x2F;IP 学习笔记：ARP 地址协议">
+<meta property="og:url" content="http://archcst.me/2018/tcpip-2/index.html">
+<meta property="og:site_name" content="ArchCST&#39;s Blog">
+<meta property="og:description" content="学习资料：《TCP&#x2F;IP详解卷1：协议》   ARP 解决了什么问题ARP 协议工作于同一 IP 子网中，主要工作是把 逻辑 Internet 地址 向对应的 物理硬件地址 进行转换。也就是把 IP 转换为 MAC 地址。ARP 就是设计来查询一个 IP 所对应的 MAC 地址的。   ARP 广播假设子网 128.32.1.0&#x2F;24 中有一台主机 128.32.1.33 发送一个帧到另一台主机">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-12-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2019-12-23T05:30:03.044Z">
+<meta property="article:author" content="ArchCST">
+<meta property="article:tag" content="learn">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://archcst.me/2018/tcpip-2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>TCP/IP 学习笔记：ARP 地址协议 | ArchCST's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta custom-logo">
+      <div class="site-meta-headline">
+        <a>
+          <img class="custom-logo-image" src="/uploads/logo.png" alt="ArchCST's Blog">
+        </a>
+      </div>
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ArchCST's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-java">
+
+    <a href="/tags/java/" rel="section"><i class="fa fa-fw fa-coffee"></i>爪哇</a>
+
+  </li>
+        <li class="menu-item menu-item-learn">
+
+    <a href="/tags/learn/" rel="section"><i class="fa fa-fw fa-mortar-board"></i>学海</a>
+
+  </li>
+        <li class="menu-item menu-item-zen">
+
+    <a href="/tags/zen/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>心法</a>
+
+  </li>
+        <li class="menu-item menu-item-cheatsheet">
+
+    <a href="/tags/cheatsheet/" rel="section"><i class="fa fa-fw fa-pencil-square"></i>小抄</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://archcst.me/2018/tcpip-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="ArchCST">
+      <meta itemprop="description" content="待得秋来九月八，<br>我花开时百花杀。<br>冲天香阵透长安，<br>满城尽带黄金甲。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ArchCST's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          TCP/IP 学习笔记：ARP 地址协议
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-12-16 00:00:00" itemprop="dateCreated datePublished" datetime="2018-12-16T00:00:00+08:00">2018-12-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-23 13:30:03" itemprop="dateModified" datetime="2019-12-23T13:30:03+08:00">2019-12-23</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2018/tcpip-2/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2018/tcpip-2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>学习资料：《TCP/IP详解卷1：协议》  </p>
+<h1 id="ARP-解决了什么问题"><a href="#ARP-解决了什么问题" class="headerlink" title="ARP 解决了什么问题"></a>ARP 解决了什么问题</h1><p>ARP 协议工作于同一 IP 子网中，主要工作是把 <code>逻辑 Internet 地址</code> 向对应的 <code>物理硬件地址</code> 进行转换。也就是把 IP 转换为 MAC 地址。<br>ARP 就是设计来查询一个 IP 所对应的 MAC 地址的。  </p>
+<h1 id="ARP-广播"><a href="#ARP-广播" class="headerlink" title="ARP 广播"></a>ARP 广播</h1><p>假设子网 <code>128.32.1.0/24</code> 中有一台主机 <code>128.32.1.33</code> 发送一个帧到另一台主机 <code>128.32.1.77</code>，两台主机都只知道对方的 IP 地址，那么就需要 ARP 去获取两个 IP 对应的 MAC 地址。<br>ARP通过 <code>广播</code> 来实现这个功能，原理如下：  </p>
+<a id="more"></a>
+
+<p>182.32.1.1 发送一个称为 <code>ARP请求</code> 的 <code>链路层广播帧</code> 到整个网段，整个 <code>128.32.1.0/24</code> 的所有主机都能收到这个帧。帧的内容为：“如果你的 IP 为 <code>128.32.1.77</code> ，请向我回应你的 MAC 地址”。  </p>
+<p>那么子网内所有主机都会收到这个广播，然后根据要求检查自己的 IP 地址。IP 地址为 <code>128.32.1.77</code> 的主机发现要找的是自己，那么就把请求方 <code>128.32.1.33</code> 的 IP 地址和 MAC 地址记录到内存中供以后使用，并同时 直接（因为它的内存中已经有了请求方的 IP 和 MAC）向 <code>128.32.1.33</code> 返回响应，这个响应包含了 <code>128.32.1.77</code> 的 IP 地址和 MAC 地址。这样两台主机的内存中就都有了对方的 IP 和 MAC 地址。  </p>
+<p>而网段内其他收到这个 ARP 请求的主机发现自己的 IP 不匹配，则会丢弃这个帧。这里就出现问题了，假设另一台主机 <code>128.32.1.123</code> 伪装自己并对 ARP 请求发起了响应，这就叫 <code>ARP 欺骗</code> ，了解即可。由于 ARP 过程发生在局域网内，一般企业内也不会有人做这种事。  </p>
+<h1 id="ARP-缓存"><a href="#ARP-缓存" class="headerlink" title="ARP 缓存"></a>ARP 缓存</h1><p>上面提到，通过 ARP 请求获取到的 IP-MAC 对应关系会储存在内存中，这就称之为 <code>ARP 缓存</code> 。ARP 高效运行的关键就是维护每个主机上的 <code>ARP 缓存</code> 。这个缓存有一个到期时间，正常情况下是 <code>20分钟</code>。<br>在 Linux 和 Windows 下都可以使用 <code>arp</code> 命令查看 ARP 缓存。<br>在 Linux 下得到的输出如下：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Linux% arp</span><br><span class="line">Address    HWtype   HWaddress            Flags Mask Iface</span><br><span class="line">gw.home    ehter    00:0D:66:4F:60:00    C           eth1</span><br></pre></td></tr></table></figure>
+
+<p>分别是主机名、硬件地址类型、硬件地址、标志、本地网络接口。需要注意的是，在 Windows 中 MAC 地址是长这样的：<code>00-0D-66-4F-60-00</code> ，用短横线分割。<br><code>标志</code> 包含三种， <code>C</code> 由 ARP 协议动态学习， <code>M</code> 由手工录入， <code>P</code> 表示“发布”，这个选项用于配置代理 ARP。代理 ARP 也属于 ARP 欺骗的一种，并不常见，通常应该尽量避免使用它。  </p>
+<h1 id="ARP-基本命令"><a href="#ARP-基本命令" class="headerlink" title="ARP 基本命令"></a>ARP 基本命令</h1><p><code>arp -a</code> 显示所有 ARP 缓存条目<br><code>arp -d</code> 删除某个条目<br><code>arp -s</code> 增加一个条目，需要 IP 地址和 MAC 地址。这个条目是半永久性的（在缓存中不会超时，但重启系统会消失）。  </p>
+<p>通常情况下，一些没有键盘但兼容以太网、TCP/IP协议的嵌入式设备，使用 DHCP 自动分配地址和其他信息，但也有可能使用 ARP 来设置 IP 地址的情况。这时候就会使用到 <code>arp -s</code> 命令。  </p>
+<div class="note info">
+            <p>ARP 是 TCP/IP 中的一个基本协议，在用户察觉不到的情况下运行。<br>ARP 用于确定本地可达的 IPv4 子网使用的 IPv4 地址所对应的硬件地址。<br>它在数据报的目的地与发送方处于同一子网时使用，还用于数据报的目的地不在本地时将其转发到一台路由器。<br>ARP 缓存是其运行的基础，可使用 arp 命令查看和处理缓存。缓存中的每个条目都有一个计时器，用于清除超时的条目。  </p>
+          </div>  
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ArchCST
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://archcst.me/2018/tcpip-2/" title="TCP&#x2F;IP 学习笔记：ARP 地址协议">http://archcst.me/2018/tcpip-2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/learn/" rel="tag"># learn</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/tcpip-1/" rel="prev" title="TCP/IP 学习笔记：IPv4、子网掩码">
+      <i class="fa fa-chevron-left"></i> TCP/IP 学习笔记：IPv4、子网掩码
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/tcpip-3/" rel="next" title="TCP/IP 学习笔记：DHCP 动态主机配置协议">
+      TCP/IP 学习笔记：DHCP 动态主机配置协议 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ARP-解决了什么问题"><span class="nav-number">1.</span> <span class="nav-text">ARP 解决了什么问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ARP-广播"><span class="nav-number">2.</span> <span class="nav-text">ARP 广播</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ARP-缓存"><span class="nav-number">3.</span> <span class="nav-text">ARP 缓存</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ARP-基本命令"><span class="nav-number">4.</span> <span class="nav-text">ARP 基本命令</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ArchCST"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">ArchCST</p>
+  <div class="site-description" itemprop="description">待得秋来九月八，<br>我花开时百花杀。<br>冲天香阵透长安，<br>满城尽带黄金甲。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ArchCST" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ArchCST" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://t.me/archcst" title="Telegram → http:&#x2F;&#x2F;t.me&#x2F;archcst" rel="noopener" target="_blank"><i class="fa fa-fw fa-telegram"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-motorcycle"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ArchCST</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: 'fRdrw3LASBz5hfs31n0aFQ9k-gzGzoHsz',
+      appKey: '60YcTNfvxGk5yGkkc8o1WhI7',
+      placeholder: "ヾﾉ≧∀≦)o 不服来战!",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: false,
+      lang: '' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
