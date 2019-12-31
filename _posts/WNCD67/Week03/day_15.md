@@ -1,5 +1,5 @@
 title: Java x D15
-date: 2019-12-31
+date: 2019-12-30
 updated: 
 comments: true
 tags:
@@ -81,7 +81,7 @@ public class FormatCallData {
 
     }
 
-    // calc the seconds since 19000101 00:00
+    // calc the seconds since 00000101 00:00
     public static int getSecondsSinceAC(int[] date) {
         // how many days does the YEAR contains since 00000101
         int daysOfYear = date[0] / 4 - date[0] / 100 + date[0] / 400 + date[0] * 365;
