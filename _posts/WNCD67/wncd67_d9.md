@@ -27,6 +27,8 @@ cmd+b:Left
 cmd+f:Right
 cmd+a:Move Caret To Line Start
 cmd+e:Move Caret To Line End
+cmd+ctrl+h: Select previous tab
+cmd+ctrl+l: Select next tab
 
 # Java 设计模式  /  随性收集中...
 ## 开闭原则
@@ -48,51 +50,5 @@ cmd+e:Move Caret To Line End
 成员方法：member-function
 封装：encapsulation
 继承：inheritance
-多态：polymorphism
+多态：polymorphic
 重写：override
-
-# 值传递和址传递
-```java
-public class DataTransfer {
-    public static void main(String[] args) {
-        DataTransfer dt = new DataTransfer();
-        int a = 11;
-        // 值传递
-        // 把栈里 a 存的基本数据类型 int 的值传递给了 test 的形参
-        dt.test(a);
-        System.out.println("原变量的值："+a);
-
-        // 分割线
-        System.out.println("---------");
-
-        int[] array = new int[]{1};
-        // 址传递，实际上也是值传递
-        // 把栈里 array 存的地址（引用类型存在栈里的值就是指向堆的地址）传递给了 testPlus 的形参
-        dt.testPlus(array);
-        System.out.println("原变量的值：" + array[0]);
-
-    }
-
-    public void test(int a){
-        System.out.println("int 赋值前：" + a);
-        a = 999;
-        System.out.println("int 赋值后：" + a);
-    }
-
-    public void testPlus(int[] nums) {
-        System.out.println("数组赋值前：" + nums[0]);
-        nums[0] =999;
-        System.out.println("数组赋值后：" + nums[0]);
-    }
-}
-```
-输出为：
-```text
-int 赋值前：11
-int 赋值后：999
-原变量的值：11
----------
-数组赋值前：1
-数组赋值后：999
-原变量的值：999
-```
