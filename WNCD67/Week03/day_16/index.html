@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/uploads/favicon/safari-pinned-tab.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Sarasa Mono SC,Lato,PingFang SC,Microsoft YaHei,sans-serif;:300,300italic,400,400italic,700,700italic|Sarasa Mono SC, Monaco, Consolas, monospace:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://archcst.me').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="homework电信字符串格式化（基于 Date 类）Date 类和 SimpleDateFormat 类的基本用法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java x D16">
+<meta property="og:url" content="http://archcst.me/WNCD67/Week03/day_16/index.html">
+<meta property="og:site_name" content="ArchCST&#39;s Blog">
+<meta property="og:description" content="homework电信字符串格式化（基于 Date 类）Date 类和 SimpleDateFormat 类的基本用法">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-12-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2019-12-31T09:46:25.878Z">
+<meta property="article:author" content="ArchCST">
+<meta property="article:tag" content="learn">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://archcst.me/WNCD67/Week03/day_16/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Java x D16 | ArchCST's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta custom-logo">
+      <div class="site-meta-headline">
+        <a>
+          <img class="custom-logo-image" src="/uploads/logo.png" alt="ArchCST's Blog">
+        </a>
+      </div>
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ArchCST's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-java">
+
+    <a href="/tags/java/" rel="section"><i class="fa fa-fw fa-coffee"></i>爪哇</a>
+
+  </li>
+        <li class="menu-item menu-item-learn">
+
+    <a href="/tags/learn/" rel="section"><i class="fa fa-fw fa-mortar-board"></i>学海</a>
+
+  </li>
+        <li class="menu-item menu-item-zen">
+
+    <a href="/tags/zen/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>心法</a>
+
+  </li>
+        <li class="menu-item menu-item-cheatsheet">
+
+    <a href="/tags/cheatsheet/" rel="section"><i class="fa fa-fw fa-pencil-square"></i>小抄</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://archcst.me/WNCD67/Week03/day_16/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="ArchCST">
+      <meta itemprop="description" content="待得秋来九月八，<br>我花开时百花杀。<br>冲天香阵透长安，<br>满城尽带黄金甲。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ArchCST's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java x D16
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-31 00:00:00 / 修改时间：17:46:25" itemprop="dateCreated datePublished" datetime="2019-12-31T00:00:00+08:00">2019-12-31</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/WNCD67/Week03/day_16/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/WNCD67/Week03/day_16/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote class="blockquote-center"><p><span style="font-variant: small-caps;">homework</span><br>电信字符串格式化（基于 Date 类）<br>Date 类和 SimpleDateFormat 类的基本用法</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="电信字符串格式化（基于-Date-类）"><a href="#电信字符串格式化（基于-Date-类）" class="headerlink" title="电信字符串格式化（基于 Date 类）"></a>电信字符串格式化（基于 Date 类）</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.text.ParseException;</span><br><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FormantCallDateWithDateClass_2</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ParseException </span>&#123;</span><br><span class="line">        String string = <span class="string">"[2016][9][8][10][55][3]&#123;1&#125;[2016][9][8][10][58][57],"</span> +</span><br><span class="line">                <span class="string">"[2004][2][28][10][55][3]&#123;0&#125;[2004][3][1][10][58][57],"</span> +</span><br><span class="line">                <span class="string">"[2005][2][28][10][55][3]&#123;1&#125;[2005][3][1][10][58][57]"</span>;</span><br><span class="line"></span><br><span class="line">        String[] data = string.split(<span class="string">","</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (String str : data) &#123;</span><br><span class="line">            System.out.println(charge(str));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">charge</span><span class="params">(String str)</span> <span class="keyword">throws</span> ParseException </span>&#123;</span><br><span class="line">        String start = str.substring(<span class="number">0</span>, str.indexOf(<span class="string">"&#123;"</span>));</span><br><span class="line">        String end = str.substring(str.indexOf(<span class="string">"&#125;"</span>) + <span class="number">1</span>);</span><br><span class="line">        String from = str.substring(str.indexOf(<span class="string">'&#123;'</span>) + <span class="number">1</span>, str.indexOf(<span class="string">'&#125;'</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// core code</span></span><br><span class="line">        SimpleDateFormat smp = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"[yyyy][MM][dd][HH][mm][ss]"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// calc the difference of start time and end time</span></span><br><span class="line">        <span class="keyword">long</span> diff = smp.parse(end).getTime() - smp.parse(start).getTime();</span><br><span class="line">        diff = diff / <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// calc hours/minutes/seconds for return</span></span><br><span class="line">        <span class="keyword">long</span> hours = diff / <span class="number">3600</span>;</span><br><span class="line">        <span class="keyword">long</span> minutes = diff / <span class="number">60</span> % <span class="number">60</span>;</span><br><span class="line">        <span class="keyword">long</span> seconds = diff % <span class="number">60</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// calc call charge: called 0, calling 0.3/min, ceiling the seconds.</span></span><br><span class="line">        <span class="keyword">double</span> money = from.equals(<span class="string">"1"</span>) ? hours * <span class="number">18</span> + minutes * <span class="number">0.3</span> + ((seconds &gt; <span class="number">0</span>) ? <span class="number">0.3</span> : <span class="number">0</span>) : <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        from = from.equals(<span class="string">"1"</span>) ? <span class="string">"主叫"</span> : <span class="string">"被叫"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> from + hours + <span class="string">"小时"</span> + minutes + <span class="string">"分钟"</span> + seconds + <span class="string">"秒，收费："</span> + money + <span class="string">"元"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">主叫0小时3分钟54秒，收费：1.2元</span><br><span class="line">被叫48小时3分钟54秒，收费：0.0元</span><br><span class="line">主叫24小时3分钟54秒，收费：433.2元</span><br></pre></td></tr></table></figure>
+<h1 id="Date-类和-SimpleDateFormat-类的基本用法"><a href="#Date-类和-SimpleDateFormat-类的基本用法" class="headerlink" title="Date 类和 SimpleDateFormat 类的基本用法"></a>Date 类和 SimpleDateFormat 类的基本用法</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LearnDate</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ParseException </span>&#123;</span><br><span class="line">        <span class="comment">// Date 类仍在使用的三个API：</span></span><br><span class="line">        <span class="comment">// 1. 无参构造，跟距当前时间生成 Date 对象</span></span><br><span class="line">        Date d = <span class="keyword">new</span> Date();</span><br><span class="line">        System.out.println(d);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2. 通过时间戳创建Date对象</span></span><br><span class="line">        <span class="comment">// 时间戳：距离1970年1月1日00:00:00 GMT 的毫秒数，Long类型</span></span><br><span class="line">        Date d2 = <span class="keyword">new</span> Date(<span class="number">1000L</span>);</span><br><span class="line">        System.out.println(d2);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3. 获取 Date 对象的时间戳</span></span><br><span class="line">        System.out.println(d.getTime());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 格式化时间输出</span></span><br><span class="line">        SimpleDateFormat simpleDateFormat = <span class="keyword">new</span> SimpleDateFormat(</span><br><span class="line">                <span class="string">"yyyy年MM月dd日 HH:mm:ss E 一年中第D天 一年中第w周（有误） 本月第W周 a 时区：z"</span>);</span><br><span class="line">        System.out.println(simpleDateFormat.format(d));</span><br><span class="line">        String string = <span class="string">"2019年12月31日 16:04:17 星期二 一年中第365天 一年中第1周（有误） 本月第5周 下午 时区：CST"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 把字符串通过 SimpleDateFormat 转换回 Date 对象</span></span><br><span class="line">        Date d3 = simpleDateFormat.parse(string);</span><br><span class="line">        System.out.println(d3);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 早于1970年的时间的时间戳是负吗？是的</span></span><br><span class="line">        SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyyMMdd"</span>);</span><br><span class="line">        Date d4 = sdf.parse(<span class="string">"16540302"</span>);</span><br><span class="line">        System.out.println(d4.getTime());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Tue Dec 31 17:39:37 CST 2019</span><br><span class="line">Thu Jan 01 08:00:01 CST 1970</span><br><span class="line">1577785177095</span><br><span class="line">2019年12月31日 17:39:37 星期二 一年中第365天 一年中第1周（有误） 本月第5周 下午 时区：CST</span><br><span class="line">Tue Dec 31 16:04:17 CST 2019</span><br><span class="line">-9966787200000</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ArchCST
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://archcst.me/WNCD67/Week03/day_16/" title="Java x D16">http://archcst.me/WNCD67/Week03/day_16/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/learn/" rel="tag"># learn</a>
+              <a href="/tags/java/" rel="tag"># java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/WNCD67/Week03/day_15/" rel="prev" title="Java x D15">
+      <i class="fa fa-chevron-left"></i> Java x D15
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#电信字符串格式化（基于-Date-类）"><span class="nav-number">1.</span> <span class="nav-text">电信字符串格式化（基于 Date 类）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Date-类和-SimpleDateFormat-类的基本用法"><span class="nav-number">2.</span> <span class="nav-text">Date 类和 SimpleDateFormat 类的基本用法</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ArchCST"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">ArchCST</p>
+  <div class="site-description" itemprop="description">待得秋来九月八，<br>我花开时百花杀。<br>冲天香阵透长安，<br>满城尽带黄金甲。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ArchCST" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ArchCST" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://t.me/archcst" title="Telegram → http:&#x2F;&#x2F;t.me&#x2F;archcst" rel="noopener" target="_blank"><i class="fa fa-fw fa-telegram"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-motorcycle"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ArchCST</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: 'fRdrw3LASBz5hfs31n0aFQ9k-gzGzoHsz',
+      appKey: '60YcTNfvxGk5yGkkc8o1WhI7',
+      placeholder: "ヾﾉ≧∀≦)o 不服来战!",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: false,
+      lang: '' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
