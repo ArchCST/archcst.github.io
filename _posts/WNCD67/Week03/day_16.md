@@ -10,6 +10,8 @@ layout: post
 {% cq %}
 <span style="font-variant: small-caps;">homework</span>
 电信字符串格式化（基于 Date 类）
+
+<span style="font-variant: small-caps;">note</span>
 Date 类和 SimpleDateFormat 类的基本用法
 {% endcq %}
 <!--more-->
