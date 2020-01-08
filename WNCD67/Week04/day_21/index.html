@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/uploads/favicon/safari-pinned-tab.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Sarasa Mono SC,Lato,PingFang SC,Microsoft YaHei,sans-serif;:300,300italic,400,400italic,700,700italic|Sarasa Mono SC, Monaco, Consolas, monospace:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://archcst.me').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="toolFaker: 生成随机中文姓名、车牌等">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java x D21">
+<meta property="og:url" content="http://archcst.me/WNCD67/Week04/day_21/index.html">
+<meta property="og:site_name" content="ArchCST&#39;s Blog">
+<meta property="og:description" content="toolFaker: 生成随机中文姓名、车牌等">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-01-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-01-08T12:03:39.655Z">
+<meta property="article:author" content="ArchCST">
+<meta property="article:tag" content="learn">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://archcst.me/WNCD67/Week04/day_21/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Java x D21 | ArchCST's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta custom-logo">
+      <div class="site-meta-headline">
+        <a>
+          <img class="custom-logo-image" src="/uploads/logo.png" alt="ArchCST's Blog">
+        </a>
+      </div>
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ArchCST's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-java">
+
+    <a href="/tags/java/" rel="section"><i class="fa fa-fw fa-coffee"></i>爪哇</a>
+
+  </li>
+        <li class="menu-item menu-item-learn">
+
+    <a href="/tags/learn/" rel="section"><i class="fa fa-fw fa-mortar-board"></i>学海</a>
+
+  </li>
+        <li class="menu-item menu-item-zen">
+
+    <a href="/tags/zen/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>心法</a>
+
+  </li>
+        <li class="menu-item menu-item-cheatsheet">
+
+    <a href="/tags/cheatsheet/" rel="section"><i class="fa fa-fw fa-pencil-square"></i>小抄</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://archcst.me/WNCD67/Week04/day_21/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="ArchCST">
+      <meta itemprop="description" content="待得秋来九月八，<br>我花开时百花杀。<br>冲天香阵透长安，<br>满城尽带黄金甲。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ArchCST's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java x D21
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-05 00:00:00" itemprop="dateCreated datePublished" datetime="2020-01-05T00:00:00+08:00">2020-01-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-08 20:03:39" itemprop="dateModified" datetime="2020-01-08T20:03:39+08:00">2020-01-08</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/WNCD67/Week04/day_21/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/WNCD67/Week04/day_21/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote class="blockquote-center"><p><span style="font-variant: small-caps;">tool</span><br>Faker: 生成随机中文姓名、车牌等</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="Faker-生成随机中文姓名、车牌等"><a href="#Faker-生成随机中文姓名、车牌等" class="headerlink" title="Faker: 生成随机中文姓名、车牌等"></a>Faker: 生成随机中文姓名、车牌等</h1><p>测试 ParkingSystem 时懒手动写车牌号等内容，就写了个式具，自动生成一些中文的信息，不定时更新，<a href="https://github.com/ArchCST/LearnJava/blob/master/playground/Faker.java" target="_blank" rel="noopener">GitHub 链接</a>。<br>在写随机中文名时看到Wiki上百家姓中有个姓叫「第五」，据说是荆轲剌秦后门下五名勇士四散逃离，为避免追杀化名第一、第二、第三、第四、第五，现在中国只剩下「第五」还有族人存在……有这个姓真的可以吹一辈子……</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.UnsupportedEncodingException;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Faker</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Random r = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Faker</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        r = <span class="keyword">new</span> Random();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Faker</span><span class="params">(<span class="keyword">long</span> seed)</span> </span>&#123;</span><br><span class="line">        r = <span class="keyword">new</span> Random(seed);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">plate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        String[] provices = &#123;<span class="string">"京"</span>, <span class="string">"津"</span>, <span class="string">"冀"</span>, <span class="string">"晋"</span>, <span class="string">"辽"</span>, <span class="string">"吉"</span>, <span class="string">"黑"</span>, <span class="string">"沪"</span>, <span class="string">"苏"</span>,</span><br><span class="line">                <span class="string">"浙"</span>, <span class="string">"皖"</span>, <span class="string">"闽"</span>, <span class="string">"赣"</span>, <span class="string">"鲁"</span>, <span class="string">"豫"</span>, <span class="string">"鄂"</span>, <span class="string">"湘"</span>, <span class="string">"粤"</span>, <span class="string">"桂"</span>, <span class="string">"琼"</span>,</span><br><span class="line">                <span class="string">"川"</span>, <span class="string">"黔"</span>, <span class="string">"贵"</span>, <span class="string">"云"</span>, <span class="string">"渝"</span>, <span class="string">"藏"</span>, <span class="string">"秦"</span>, <span class="string">"陇"</span>, <span class="string">"青"</span>, <span class="string">"宁"</span>, <span class="string">"新"</span>,</span><br><span class="line">                <span class="string">"港"</span>, <span class="string">"澳"</span>, <span class="string">"台"</span>&#125;;</span><br><span class="line"></span><br><span class="line">        sb.append(provices[r.nextInt(provices.length)]);</span><br><span class="line">        sb.append((<span class="keyword">char</span>) (r.nextInt(<span class="number">26</span>) + <span class="string">'A'</span>));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; <span class="number">7</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (r.nextBoolean()) &#123;</span><br><span class="line">                sb.append((<span class="keyword">char</span>) (r.nextInt(<span class="number">26</span>) + <span class="string">'A'</span>));</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                sb.append((<span class="keyword">char</span>) (r.nextInt(<span class="number">10</span>) + <span class="string">'0'</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">color</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String[] colors = &#123;<span class="string">"红"</span>, <span class="string">"橙"</span>, <span class="string">"黄"</span>, <span class="string">"绿"</span>, <span class="string">"青"</span>, <span class="string">"蓝"</span>, <span class="string">"紫"</span>&#125;;</span><br><span class="line">        <span class="keyword">return</span> colors[<span class="keyword">new</span> Random().nextInt(colors.length)];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">timeBefore</span><span class="params">(<span class="keyword">int</span> days, <span class="keyword">int</span> hours, <span class="keyword">int</span> minutes)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Date().getTime() - r.nextInt(days * <span class="number">86400</span> + hours * <span class="number">3600</span> + minutes * <span class="number">60</span>) * <span class="number">1000</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">timeAfter</span><span class="params">(<span class="keyword">int</span> days, <span class="keyword">int</span> hours, <span class="keyword">int</span> minutes)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Date().getTime() + r.nextInt(days * <span class="number">86400</span> + hours * <span class="number">3600</span> + minutes * <span class="number">60</span>) * <span class="number">1000</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">randomChineseWord</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String str = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">int</span> highpos, lowpos;</span><br><span class="line">        highpos = (<span class="number">176</span> + r.nextInt(<span class="number">39</span>));</span><br><span class="line">        lowpos = (<span class="number">161</span> + r.nextInt(<span class="number">93</span>));</span><br><span class="line">        <span class="keyword">byte</span>[] bb = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">2</span>];</span><br><span class="line">        bb[<span class="number">0</span>] = <span class="keyword">new</span> Integer(highpos).byteValue();</span><br><span class="line">        bb[<span class="number">1</span>] = <span class="keyword">new</span> Integer(lowpos).byteValue();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            str = <span class="keyword">new</span> String(bb, <span class="string">"GBK"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">surname</span><span class="params">(<span class="keyword">boolean</span> bigSet)</span> </span>&#123;</span><br><span class="line">        String[] surnames = &#123;</span><br><span class="line">                <span class="string">"赵"</span>, <span class="string">"钱"</span>, <span class="string">"孙"</span>, <span class="string">"李"</span>, <span class="string">"周"</span>, <span class="string">"吴"</span>, <span class="string">"郑"</span>, <span class="string">"王"</span>, <span class="string">"冯"</span>, <span class="string">"陈"</span>, <span class="string">"褚"</span>, <span class="string">"卫"</span>, <span class="string">"蒋"</span>, <span class="string">"沈"</span>, <span class="string">"韩"</span>, <span class="string">"杨"</span>,</span><br><span class="line">                <span class="string">"朱"</span>, <span class="string">"秦"</span>, <span class="string">"尤"</span>, <span class="string">"许"</span>, <span class="string">"何"</span>, <span class="string">"吕"</span>, <span class="string">"施"</span>, <span class="string">"张"</span>, <span class="string">"孔"</span>, <span class="string">"曹"</span>, <span class="string">"严"</span>, <span class="string">"华"</span>, <span class="string">"金"</span>, <span class="string">"魏"</span>, <span class="string">"陶"</span>, <span class="string">"姜 "</span>,</span><br><span class="line">                <span class="string">"戚"</span>, <span class="string">"谢"</span>, <span class="string">"邹"</span>, <span class="string">"喻"</span>, <span class="string">"柏"</span>, <span class="string">"水"</span>, <span class="string">"窦"</span>, <span class="string">"章"</span>, <span class="string">"云"</span>, <span class="string">"苏"</span>, <span class="string">"潘"</span>, <span class="string">"葛"</span>, <span class="string">"奚"</span>, <span class="string">"范"</span>, <span class="string">"彭"</span>, <span class="string">"郎"</span>,</span><br><span class="line">                <span class="string">"鲁"</span>, <span class="string">"韦"</span>, <span class="string">"昌"</span>, <span class="string">"马"</span>, <span class="string">"苗"</span>, <span class="string">"凤"</span>, <span class="string">"花"</span>, <span class="string">"方"</span>, <span class="string">"俞"</span>, <span class="string">"任"</span>, <span class="string">"袁"</span>, <span class="string">"柳"</span>, <span class="string">"酆"</span>, <span class="string">"鲍"</span>, <span class="string">"史"</span>, <span class="string">"唐"</span>,</span><br><span class="line">                <span class="string">"费"</span>, <span class="string">"廉"</span>, <span class="string">"岑"</span>, <span class="string">"薛"</span>, <span class="string">"雷"</span>, <span class="string">"贺"</span>, <span class="string">"倪"</span>, <span class="string">"汤"</span>, <span class="string">"滕"</span>, <span class="string">"殷"</span>, <span class="string">"罗"</span>, <span class="string">"毕"</span>, <span class="string">"郝"</span>, <span class="string">"邬"</span>, <span class="string">"安"</span>, <span class="string">"常"</span>,</span><br><span class="line">                <span class="string">"乐"</span>, <span class="string">"于"</span>, <span class="string">"时"</span>, <span class="string">"傅"</span>, <span class="string">"皮"</span>, <span class="string">"卞"</span>, <span class="string">"齐"</span>, <span class="string">"康"</span>, <span class="string">"伍"</span>, <span class="string">"余"</span>, <span class="string">"元"</span>, <span class="string">"卜"</span>, <span class="string">"顾"</span>, <span class="string">"孟"</span>, <span class="string">"平"</span>, <span class="string">"黄"</span>,</span><br><span class="line">                <span class="string">"和"</span>, <span class="string">"穆"</span>, <span class="string">"萧"</span>, <span class="string">"尹"</span>, <span class="string">"姚"</span>, <span class="string">"邵"</span>, <span class="string">"湛"</span>, <span class="string">"汪"</span>, <span class="string">"祁"</span>, <span class="string">"毛"</span>, <span class="string">"禹"</span>, <span class="string">"狄"</span>, <span class="string">"米"</span>, <span class="string">"贝"</span>, <span class="string">"明"</span>, <span class="string">"臧"</span>,</span><br><span class="line">                <span class="string">"计"</span>, <span class="string">"伏"</span>, <span class="string">"成"</span>, <span class="string">"戴"</span>, <span class="string">"谈"</span>, <span class="string">"宋"</span>, <span class="string">"茅"</span>, <span class="string">"庞"</span>, <span class="string">"熊"</span>, <span class="string">"纪"</span>, <span class="string">"舒"</span>, <span class="string">"屈"</span>, <span class="string">"项"</span>, <span class="string">"祝"</span>, <span class="string">"董"</span>, <span class="string">"梁"</span>,</span><br><span class="line">                <span class="string">"杜"</span>, <span class="string">"阮"</span>, <span class="string">"蓝"</span>, <span class="string">"闵"</span>, <span class="string">"席"</span>, <span class="string">"季"</span>, <span class="string">"麻"</span>, <span class="string">"强"</span>, <span class="string">"贾"</span>, <span class="string">"路"</span>, <span class="string">"娄"</span>, <span class="string">"危"</span>, <span class="string">"江"</span>, <span class="string">"童"</span>, <span class="string">"颜"</span>, <span class="string">"郭"</span>,</span><br><span class="line">                <span class="string">"梅"</span>, <span class="string">"盛"</span>, <span class="string">"林"</span>, <span class="string">"刁"</span>, <span class="string">"锺"</span>, <span class="string">"徐"</span>, <span class="string">"邱"</span>, <span class="string">"骆"</span>, <span class="string">"高"</span>, <span class="string">"夏"</span>, <span class="string">"蔡"</span>, <span class="string">"田"</span>, <span class="string">"樊"</span>, <span class="string">"胡"</span>, <span class="string">"凌"</span>, <span class="string">"霍"</span>,</span><br><span class="line">                <span class="string">"虞"</span>, <span class="string">"万"</span>, <span class="string">"支"</span>, <span class="string">"柯"</span>, <span class="string">"昝"</span>, <span class="string">"管"</span>, <span class="string">"卢"</span>, <span class="string">"莫"</span>, <span class="string">"经"</span>, <span class="string">"房"</span>, <span class="string">"裘"</span>, <span class="string">"缪"</span>, <span class="string">"干"</span>, <span class="string">"解"</span>, <span class="string">"应"</span>, <span class="string">"宗"</span>,</span><br><span class="line">                <span class="string">"丁"</span>, <span class="string">"宣"</span>, <span class="string">"贲"</span>, <span class="string">"邓"</span>, <span class="string">"郁"</span>, <span class="string">"单"</span>, <span class="string">"杭"</span>, <span class="string">"洪"</span>, <span class="string">"包"</span>, <span class="string">"诸"</span>, <span class="string">"左"</span>, <span class="string">"石"</span>, <span class="string">"崔"</span>, <span class="string">"吉"</span>, <span class="string">"钮"</span>, <span class="string">"龚"</span>,</span><br><span class="line">                <span class="string">"程"</span>, <span class="string">"嵇"</span>, <span class="string">"邢"</span>, <span class="string">"滑"</span>, <span class="string">"裴"</span>, <span class="string">"陆"</span>, <span class="string">"荣"</span>, <span class="string">"翁"</span>, <span class="string">"荀"</span>, <span class="string">"羊"</span>, <span class="string">"於"</span>, <span class="string">"惠"</span>, <span class="string">"甄"</span>, <span class="string">"麹"</span>, <span class="string">"家"</span>, <span class="string">"封"</span>,</span><br><span class="line">                <span class="string">"芮"</span>, <span class="string">"羿"</span>, <span class="string">"储"</span>, <span class="string">"靳"</span>, <span class="string">"汲"</span>, <span class="string">"邴"</span>, <span class="string">"糜"</span>, <span class="string">"松"</span>, <span class="string">"井"</span>, <span class="string">"段"</span>, <span class="string">"富"</span>, <span class="string">"巫"</span>, <span class="string">"乌"</span>, <span class="string">"焦"</span>, <span class="string">"巴"</span>, <span class="string">"弓"</span>,</span><br><span class="line">                <span class="string">"牧"</span>, <span class="string">"隗"</span>, <span class="string">"山"</span>, <span class="string">"谷"</span>, <span class="string">"车"</span>, <span class="string">"侯"</span>, <span class="string">"宓"</span>, <span class="string">"蓬"</span>, <span class="string">"全"</span>, <span class="string">"郗"</span>, <span class="string">"班"</span>, <span class="string">"仰"</span>, <span class="string">"秋"</span>, <span class="string">"仲"</span>, <span class="string">"伊"</span>, <span class="string">"宫"</span>,</span><br><span class="line">                <span class="string">"甯"</span>, <span class="string">"仇"</span>, <span class="string">"栾"</span>, <span class="string">"暴"</span>, <span class="string">"甘"</span>, <span class="string">"钭"</span>, <span class="string">"厉"</span>, <span class="string">"戎"</span>, <span class="string">"祖"</span>, <span class="string">"武"</span>, <span class="string">"符"</span>, <span class="string">"刘"</span>, <span class="string">"景"</span>, <span class="string">"詹"</span>, <span class="string">"束"</span>, <span class="string">"龙"</span>,</span><br><span class="line">                <span class="string">"叶"</span>, <span class="string">"幸"</span>, <span class="string">"司"</span>, <span class="string">"韶"</span>, <span class="string">"郜"</span>, <span class="string">"黎"</span>, <span class="string">"蓟"</span>, <span class="string">"薄"</span>, <span class="string">"印"</span>, <span class="string">"宿"</span>, <span class="string">"白"</span>, <span class="string">"怀"</span>, <span class="string">"蒲"</span>, <span class="string">"邰"</span>, <span class="string">"从"</span>, <span class="string">"鄂"</span>,</span><br><span class="line">                <span class="string">"索"</span>, <span class="string">"咸"</span>, <span class="string">"籍"</span>, <span class="string">"赖"</span>, <span class="string">"卓"</span>, <span class="string">"蔺"</span>, <span class="string">"屠"</span>, <span class="string">"蒙"</span>, <span class="string">"池"</span>, <span class="string">"乔"</span>, <span class="string">"阴"</span>, <span class="string">"鬱"</span>, <span class="string">"胥"</span>, <span class="string">"能"</span>, <span class="string">"苍"</span>, <span class="string">"双"</span>,</span><br><span class="line">                <span class="string">"闻"</span>, <span class="string">"莘"</span>, <span class="string">"党"</span>, <span class="string">"翟"</span>, <span class="string">"谭"</span>, <span class="string">"贡"</span>, <span class="string">"劳"</span>, <span class="string">"逄"</span>, <span class="string">"姬"</span>, <span class="string">"申"</span>, <span class="string">"扶"</span>, <span class="string">"堵"</span>, <span class="string">"冉"</span>, <span class="string">"宰"</span>, <span class="string">"郦"</span>, <span class="string">"雍"</span>,</span><br><span class="line">                <span class="string">"郤"</span>, <span class="string">"璩"</span>, <span class="string">"桑"</span>, <span class="string">"桂"</span>, <span class="string">"濮"</span>, <span class="string">"牛"</span>, <span class="string">"寿"</span>, <span class="string">"通"</span>, <span class="string">"边"</span>, <span class="string">"扈"</span>, <span class="string">"燕"</span>, <span class="string">"冀"</span>, <span class="string">"郏"</span>, <span class="string">"浦"</span>, <span class="string">"尚"</span>, <span class="string">"农"</span>,</span><br><span class="line">                <span class="string">"温"</span>, <span class="string">"别"</span>, <span class="string">"庄"</span>, <span class="string">"晏"</span>, <span class="string">"柴"</span>, <span class="string">"瞿"</span>, <span class="string">"阎"</span>, <span class="string">"充"</span>, <span class="string">"慕"</span>, <span class="string">"连"</span>, <span class="string">"茹"</span>, <span class="string">"习"</span>, <span class="string">"宦"</span>, <span class="string">"艾"</span>, <span class="string">"鱼"</span>, <span class="string">"容"</span>,</span><br><span class="line">                <span class="string">"向"</span>, <span class="string">"古"</span>, <span class="string">"易"</span>, <span class="string">"慎"</span>, <span class="string">"戈"</span>, <span class="string">"廖"</span>, <span class="string">"庾"</span>, <span class="string">"终"</span>, <span class="string">"暨"</span>, <span class="string">"居"</span>, <span class="string">"衡"</span>, <span class="string">"步"</span>, <span class="string">"都"</span>, <span class="string">"耿"</span>, <span class="string">"满"</span>, <span class="string">"弘"</span>,</span><br><span class="line">                <span class="string">"匡"</span>, <span class="string">"国"</span>, <span class="string">"文"</span>, <span class="string">"寇"</span>, <span class="string">"广"</span>, <span class="string">"禄"</span>, <span class="string">"阙"</span>, <span class="string">"东"</span>, <span class="string">"欧"</span>, <span class="string">"殳"</span>, <span class="string">"沃"</span>, <span class="string">"利"</span>, <span class="string">"蔚"</span>, <span class="string">"越"</span>, <span class="string">"夔"</span>, <span class="string">"隆"</span>,</span><br><span class="line">                <span class="string">"师"</span>, <span class="string">"巩"</span>, <span class="string">"厍"</span>, <span class="string">"聂"</span>, <span class="string">"晁"</span>, <span class="string">"勾"</span>, <span class="string">"敖"</span>, <span class="string">"融"</span>, <span class="string">"冷"</span>, <span class="string">"訾"</span>, <span class="string">"辛"</span>, <span class="string">"阚"</span>, <span class="string">"那"</span>, <span class="string">"简"</span>, <span class="string">"饶"</span>, <span class="string">"空"</span>,</span><br><span class="line">                <span class="string">"曾"</span>, <span class="string">"毋"</span>, <span class="string">"沙"</span>, <span class="string">"乜"</span>, <span class="string">"养"</span>, <span class="string">"鞠"</span>, <span class="string">"须"</span>, <span class="string">"丰"</span>, <span class="string">"巢"</span>, <span class="string">"关"</span>, <span class="string">"蒯"</span>, <span class="string">"相"</span>, <span class="string">"查"</span>, <span class="string">"后"</span>, <span class="string">"荆"</span>, <span class="string">"红"</span>,</span><br><span class="line">                <span class="string">"游"</span>, <span class="string">"竺"</span>, <span class="string">"权"</span>, <span class="string">"逯"</span>, <span class="string">"盖"</span>, <span class="string">"益"</span>, <span class="string">"桓"</span>, <span class="string">"公"</span>, <span class="string">"仉"</span>, <span class="string">"督"</span>, <span class="string">"晋"</span>, <span class="string">"楚"</span>, <span class="string">"闫"</span>, <span class="string">"法"</span>, <span class="string">"汝"</span>, <span class="string">"鄢"</span>,</span><br><span class="line">                <span class="string">"涂"</span>, <span class="string">"钦"</span>, <span class="string">"归"</span>, <span class="string">"海"</span>, <span class="string">"岳"</span>, <span class="string">"帅"</span>, <span class="string">"缑"</span>, <span class="string">"亢"</span>, <span class="string">"况"</span>, <span class="string">"后"</span>, <span class="string">"有"</span>, <span class="string">"琴"</span>, <span class="string">"商"</span>, <span class="string">"牟"</span>, <span class="string">"佘"</span>, <span class="string">"佴"</span>,</span><br><span class="line">                <span class="string">"伯"</span>, <span class="string">"赏"</span>, <span class="string">"墨"</span>, <span class="string">"哈"</span>, <span class="string">"谯"</span>, <span class="string">"笪"</span>, <span class="string">"年"</span>, <span class="string">"爱"</span>, <span class="string">"阳"</span>, <span class="string">"佟 "</span>, <span class="string">"言"</span>, <span class="string">"福"</span>,</span><br><span class="line">                <span class="string">"万俟"</span>, <span class="string">"司马"</span>, <span class="string">"上官"</span>, <span class="string">"欧阳"</span>, <span class="string">"夏侯"</span>, <span class="string">"诸葛"</span>, <span class="string">"闻人"</span>, <span class="string">"东方"</span>, <span class="string">"赫连"</span>, <span class="string">"皇甫"</span>, <span class="string">"尉迟"</span>, <span class="string">"公羊"</span>,</span><br><span class="line">                <span class="string">"澹台"</span>, <span class="string">"公冶"</span>, <span class="string">"宗政"</span>, <span class="string">"濮阳"</span>, <span class="string">"淳于"</span>, <span class="string">"单于"</span>, <span class="string">"太叔"</span>, <span class="string">"申屠"</span>, <span class="string">"公孙"</span>, <span class="string">"仲孙"</span>, <span class="string">"轩辕"</span>, <span class="string">"令狐"</span>,</span><br><span class="line">                <span class="string">"锺离"</span>, <span class="string">"宇文"</span>, <span class="string">"长孙"</span>, <span class="string">"慕容"</span>, <span class="string">"鲜于"</span>, <span class="string">"闾丘"</span>, <span class="string">"司徒"</span>, <span class="string">"司空"</span>, <span class="string">"亓官"</span>, <span class="string">"司寇"</span>, <span class="string">"子车"</span>, <span class="string">"颛孙"</span>,</span><br><span class="line">                <span class="string">"端木"</span>, <span class="string">"巫马"</span>, <span class="string">"公西"</span>, <span class="string">"漆雕"</span>, <span class="string">"乐正"</span>, <span class="string">"壤驷"</span>, <span class="string">"公良"</span>, <span class="string">"拓跋"</span>, <span class="string">"夹谷"</span>, <span class="string">"宰父"</span>, <span class="string">"穀梁"</span>, <span class="string">"段干"</span>,</span><br><span class="line">                <span class="string">"百里"</span>, <span class="string">"东郭"</span>, <span class="string">"南门"</span>, <span class="string">"呼延"</span>, <span class="string">"羊舌"</span>, <span class="string">"微生"</span>, <span class="string">"梁丘"</span>, <span class="string">"左丘"</span>, <span class="string">"东门"</span>, <span class="string">"西门"</span>, <span class="string">"南宫"</span>, <span class="string">"第五"</span>&#125;;</span><br><span class="line"></span><br><span class="line">        String[] smallSurnames = &#123;</span><br><span class="line">                <span class="string">"王"</span>, <span class="string">"李"</span>, <span class="string">"张"</span>, <span class="string">"刘"</span>, <span class="string">"陈"</span>, <span class="string">"杨"</span>, <span class="string">"黄"</span>, <span class="string">"赵"</span>, <span class="string">"周"</span>, <span class="string">"吴"</span>, <span class="string">"徐"</span>, <span class="string">"孙"</span>, <span class="string">"马"</span>, <span class="string">"胡"</span>, <span class="string">"朱"</span>, <span class="string">"郭"</span>,</span><br><span class="line">                <span class="string">"何"</span>, <span class="string">"罗"</span>, <span class="string">"高"</span>, <span class="string">"林"</span>,</span><br><span class="line">                <span class="string">"欧阳"</span>, <span class="string">"上官"</span>, <span class="string">"皇甫"</span>, <span class="string">"司徒"</span>, <span class="string">"令狐"</span>, <span class="string">"诸葛"</span>, <span class="string">"司马"</span>, <span class="string">"宇文"</span>, <span class="string">"申屠"</span>, <span class="string">"南宫"</span>, <span class="string">"夏侯"</span>&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (bigSet) &#123;</span><br><span class="line">            <span class="keyword">return</span> surnames[r.nextInt(smallSurnames.length)];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> smallSurnames[r.nextInt(smallSurnames.length)];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">surname</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> surname(<span class="keyword">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> length length of name</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> a random Chinese person's name. User small set of surnames (around 30 surnames).</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">chineseName</span><span class="params">(<span class="keyword">int</span> length)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> chineseName(length, <span class="keyword">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Generate a Chinese name.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> length        length of the Chinese name.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> bigSurnameSet if true use big surname set (504 surnames) including Chinese very rare surnames.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> A Chinese name.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">chineseName</span><span class="params">(<span class="keyword">int</span> length, <span class="keyword">boolean</span> bigSurnameSet)</span> </span>&#123;</span><br><span class="line">        String surname = surname(bigSurnameSet);</span><br><span class="line">        String firstname = <span class="string">""</span>;</span><br><span class="line">        <span class="comment">// 中文名至少两个字</span></span><br><span class="line">        <span class="keyword">if</span> (length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"-1"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 复姓修正</span></span><br><span class="line">        <span class="keyword">while</span> (surname.length() &gt; length - <span class="number">1</span>) &#123;</span><br><span class="line">            surname = surname(bigSurnameSet);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 生成名</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length - surname.length(); i++) &#123;</span><br><span class="line">            firstname += randomChineseWord();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> surname + firstname;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">chineseName</span><span class="params">(<span class="keyword">int</span> min, <span class="keyword">int</span> max, <span class="keyword">boolean</span> bigSurnameSet)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (min &lt; <span class="number">2</span> || max &lt; <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"-1"</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> length = r.nextInt(Math.abs(max - min) + <span class="number">1</span>) + Math.min(min, max);</span><br><span class="line">        <span class="keyword">return</span> chineseName(length, bigSurnameSet);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* test code */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Faker faker = <span class="keyword">new</span> Faker();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">            System.out.println(<span class="string">"二字名："</span> + faker.chineseName(<span class="number">2</span>));</span><br><span class="line">            System.out.println(<span class="string">"三字名："</span> + faker.chineseName(<span class="number">3</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>ArchCST
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://archcst.me/WNCD67/Week04/day_21/" title="Java x D21">http://archcst.me/WNCD67/Week04/day_21/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/learn/" rel="tag"># learn</a>
+              <a href="/tags/java/" rel="tag"># java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/WNCD67/Week03/day_20/" rel="prev" title="Java x D20">
+      <i class="fa fa-chevron-left"></i> Java x D20
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/WNCD67/Week04/day_22/" rel="next" title="Java x D22">
+      Java x D22 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Faker-生成随机中文姓名、车牌等"><span class="nav-number">1.</span> <span class="nav-text">Faker: 生成随机中文姓名、车牌等</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ArchCST"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">ArchCST</p>
+  <div class="site-description" itemprop="description">待得秋来九月八，<br>我花开时百花杀。<br>冲天香阵透长安，<br>满城尽带黄金甲。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ArchCST" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ArchCST" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://t.me/archcst" title="Telegram → http:&#x2F;&#x2F;t.me&#x2F;archcst" rel="noopener" target="_blank"><i class="fa fa-fw fa-telegram"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-motorcycle"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ArchCST</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: 'fRdrw3LASBz5hfs31n0aFQ9k-gzGzoHsz',
+      appKey: '60YcTNfvxGk5yGkkc8o1WhI7',
+      placeholder: "ヾﾉ≧∀≦)o 不服来战!",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: false,
+      lang: '' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
