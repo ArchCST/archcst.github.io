@@ -534,6 +534,7 @@
 
 <h2 id="唯一约束-UNIQUE"><a href="#唯一约束-UNIQUE" class="headerlink" title="唯一约束 (UNIQUE)"></a>唯一约束 (UNIQUE)</h2><p>第 13 行定义了唯一约束  </p>
 <p><code>UNIQUE</code> 约束的字段的值不能有重复。当 <code>INSERT</code> 数据重复时，会操作失败。  </p>
+<p>和 <code>PRIMARY KEY</code> 相比，一张表可以有很多个唯一约束，但只能有一个主键。唯一约束允<br>许 null，但主键不行。</p>
 <h2 id="非空约束-NOT-NULL"><a href="#非空约束-NOT-NULL" class="headerlink" title="非空约束 (NOT NULL)"></a>非空约束 (NOT NULL)</h2><p>第 7 行定义了非空约束  </p>
 <p>被非空约束的列，在插入值时必须非空。  </p>
 <h2 id="自增-AUTO-INCREMENT"><a href="#自增-AUTO-INCREMENT" class="headerlink" title="自增 (AUTO_INCREMENT)"></a>自增 (AUTO_INCREMENT)</h2><p>第 12、20 行定义了自增  </p>
@@ -865,7 +866,7 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
       placeholder: "ヾﾉ≧∀≦)o 不服来战!",
       avatar: 'mm',
       meta: guest,
-      pageSize: '10' || 10,
+      pageSize: '30' || 10,
       visitor: false,
       lang: '' || 'zh-cn',
       path: location.pathname,
