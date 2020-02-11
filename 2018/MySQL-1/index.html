@@ -54,7 +54,7 @@
 <meta property="og:description" content="MySQL 语句是不区分大小写的，但是为了区分保留字和变量名，一般把保留字大写，变量和数据小写。本文是以前学习 MySQL 时写的，非常基础，内容也比一般的教程更详细一些，基本上操作完本文内容，就对数据库有了一个直观的了解了。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-09-15T16:00:00.000Z">
-<meta property="article:modified_time" content="2019-12-23T03:42:42.292Z">
+<meta property="article:modified_time" content="2020-02-10T16:00:00.000Z">
 <meta property="article:author" content="ArchCST">
 <meta property="article:tag" content="learn">
 <meta name="twitter:card" content="summary">
@@ -230,7 +230,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-23 11:42:42" itemprop="dateModified" datetime="2019-12-23T11:42:42+08:00">2019-12-23</time>
+                <time title="修改时间：2020-02-11 00:00:00" itemprop="dateModified" datetime="2020-02-11T00:00:00+08:00">2020-02-11</time>
               </span>
 
           
@@ -269,8 +269,10 @@
 <h2 id="CentOS-7"><a href="#CentOS-7" class="headerlink" title="CentOS 7"></a>CentOS 7</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装 MySQL 的分支 MariaDB</span></span><br><span class="line">sudo yum install mariadb-server mariadb</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动 MariaDB</span></span><br><span class="line">sudo systemctl start mariadb    #启动MariaDB</span><br><span class="line">sudo systemctl stop mariadb     #停止MariaDB</span><br><span class="line">sudo systemctl restart mariadb  #重启MariaDB</span><br><span class="line">sudo systemctl enable mariadb   #设置开机启动</span><br></pre></td></tr></table></figure>
 
 <p>MariaDB 数据库管理系统是 MySQL 的一个分支，主要由开源社区在维护，采用 GPL 授权许可。<br>开发这个分支的原因之一是：甲骨文公司收购了 MySQL 后，有将 MySQL 闭源的潜在风险，因此社区采用分支的方式来避开这个风险。<br>MariaDB 的目的是完全兼容 MySQL，包括 API 和命令行，使之能轻松成为 MySQL 的代替品。  </p>
-<h1 id="MySQL-数据库的基本使用方法"><a href="#MySQL-数据库的基本使用方法" class="headerlink" title="MySQL 数据库的基本使用方法"></a>MySQL 数据库的基本使用方法</h1><p>使用 root 登陆并查看本机数据库，注意此 root 并非 Linux 的 root，而是 MySQL 的 root，所以默认应该是没有密码的：  </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root</span><br></pre></td></tr></table></figure>
+<h1 id="数据库的基本概念"><a href="#数据库的基本概念" class="headerlink" title="数据库的基本概念"></a>数据库的基本概念</h1><p>数据库：简单来说一般一个软件（特别是和数据有关的软件）会把它所拥有的 <code>所有数据</code><br>放在一个 <code>数据库</code> 中，举个栗子来说，学生信息管理软件就拥有一个数据库，其中包含了<br>所有学生的信息。<br>表：每个数据库都有多张表，每张表都是个二维结构，大概可以把它看成是一张 Excel 的<br>表格。这个 Excel 的每一列对应着数据库的一个 <code>字段</code>，比如学生基本信息表就有字段 <code>学号、姓名、班级</code> 等等。而这个 Excel 表中的每一行都是一条 <code>数据</code>，比如<br><code>0001、杰伦·小眼·周 、三年二班</code> 。可以看到，<code>数据</code> 和 <code>字段</code> 是严格一<br>一对应起来的。</p>
+<h1 id="MySQL-数据库的基本使用方法"><a href="#MySQL-数据库的基本使用方法" class="headerlink" title="MySQL 数据库的基本使用方法"></a>MySQL 数据库的基本使用方法</h1><p>使用 root 登陆数据库管理软件（DBMS: database managment service），注意此 root 并非 Linux 的 root，而是 MySQL 的 root：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 登录本机数据库</span></span><br><span class="line">mysql -u root -p # 回车后提示输入数据库密码</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果是远程数据库需要加 -h</span></span><br><span class="line">mysql -u root -h 服务器ip -p</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果还要指定数据库端口</span></span><br><span class="line">mysql -u root -h 服务器ip -P 服务端口 -p</span><br></pre></td></tr></table></figure>
+
 
 <p>查看本机数据库：  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW databases;</span><br></pre></td></tr></table></figure>
@@ -314,64 +316,130 @@
 <thead>
 <tr>
 <th>数据类型</th>
+<th>字节</th>
 <th>示例</th>
 <th>说明</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>INT</td>
+<td>TINYINT</td>
+<td>1</td>
 <td></td>
-<td>整数</td>
+<td>2^8  = 255，带符号减半</td>
+</tr>
+<tr>
+<td>SMALLINT</td>
+<td>2</td>
+<td></td>
+<td>2^16 = 65536</td>
+</tr>
+<tr>
+<td>MEDIUMINT</td>
+<td>3</td>
+<td></td>
+<td>2^24 = 16777215</td>
+</tr>
+<tr>
+<td>INT</td>
+<td>4</td>
+<td></td>
+<td>2^32 Java 中的 int</td>
+</tr>
+<tr>
+<td>BIGINT</td>
+<td>8</td>
+<td></td>
+<td>2^64 Java 中的 long</td>
 </tr>
 <tr>
 <td>FLOAT</td>
+<td></td>
 <td></td>
 <td>单精度浮点数</td>
 </tr>
 <tr>
 <td>DOUBLE</td>
 <td></td>
+<td></td>
 <td>双精度浮点数</td>
 </tr>
 <tr>
+<td>DECIMAL NUMERIC</td>
+<td></td>
+<td>DECIMAL(4,1)</td>
+<td>共4位，小数点后1位，小数点前3位</td>
+</tr>
+<tr>
 <td>ENUM</td>
+<td></td>
 <td>ENUM(‘a’,’b’,’c’)</td>
-<td>单选</td>
+<td>枚举，单选</td>
 </tr>
 <tr>
 <td>SET</td>
+<td></td>
 <td>SET(‘1’,’2’,’3’)</td>
 <td>多选</td>
 </tr>
 <tr>
 <td>DATE</td>
+<td>3</td>
 <td>YYYY-MM-DD</td>
 <td>日期</td>
 </tr>
 <tr>
 <td>TIME</td>
+<td>3</td>
 <td>HH:MM:SS</td>
 <td>时间</td>
 </tr>
 <tr>
+<td>DATETIME</td>
+<td>8</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>4</td>
+<td></td>
+<td>时间戳，一张表只能有一个时间戳列，时间戳能获取当前系统时间</td>
+</tr>
+<tr>
 <td>YEAR</td>
+<td></td>
 <td>YYYY</td>
 <td>年份</td>
 </tr>
 <tr>
 <td>CHAR</td>
-<td></td>
+<td>n*2</td>
+<td>CHAR(10)</td>
 <td>定长字符串</td>
 </tr>
 <tr>
 <td>VARCHAR</td>
-<td></td>
-<td>变长字符串</td>
+<td>实际长度+1</td>
+<td>VARCHAR(50)</td>
+<td>变长字符串，长度不超过255</td>
 </tr>
 <tr>
 <td>TEXT</td>
 <td></td>
-<td>长文本</td>
+<td></td>
+<td>长文本，还有MEDIUMTEXT、LONGTEXT等，一般用TEXT就行</td>
+</tr>
+<tr>
+<td>BLOB</td>
+<td></td>
+<td></td>
+<td>长二进制数据，如图片、文档附件等</td>
+</tr>
+<tr>
+<td>BIT</td>
+<td>1</td>
+<td></td>
+<td>只能存0或者1，最长64位</td>
 </tr>
 </tbody></table>
 <p>扩展阅读：<a href="https://blog.csdn.net/anxpp/article/details/51284106#comments" target="_blank" rel="noopener">MySQL 中的数据类型介绍 - CSDN博客</a>  </p>
@@ -385,9 +453,9 @@
 <table>
 <thead>
 <tr>
-<th>u<sub>id</sub></th>
-<th>u<sub>name</sub></th>
-<th>u<sub>phone</sub></th>
+<th>u_id</th>
+<th>u_name</th>
+<th>u_phone</th>
 </tr>
 </thead>
 <tbody><tr>
@@ -411,7 +479,7 @@
 <p>再使用 <code>SELECT * FROM users;</code> 确认操作是否成功。  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+------|---------|---------+</span><br><span class="line">| u_id | u_name  | u_phone |</span><br><span class="line">+------|---------|---------+</span><br><span class="line">|    1 | Alpha   | 54321   |</span><br><span class="line">|    2 | Bravo   | 54322   |</span><br><span class="line">|    3 | Charlie | 54323   |</span><br><span class="line">+------|---------|---------+</span><br></pre></td></tr></table></figure>
 
-<h1 id="创建-db-gamer-数据库"><a href="#创建-db-gamer-数据库" class="headerlink" title="创建 db_gamer 数据库"></a>创建 db_<sub>gamer</sub> 数据库</h1><p>在 MySQL 中，我们可以通过使用 <code>source</code> 来引入一个包含 MySQL 代码的文件来操作数据库。  </p>
+<h1 id="创建-db-gamer-数据库"><a href="#创建-db-gamer-数据库" class="headerlink" title="创建 db_gamer 数据库"></a>创建 db_gamer 数据库</h1><p>在 MySQL 中，我们可以通过使用 <code>source</code> 来引入一个包含 MySQL 代码的文件来操作数据库。  </p>
 <p>举个例子，我们要新建一个数据库 <code>db_gamer</code>，这个数据库中有三张表。  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">表 &#x3D;rooms&#x3D;，包含房间名称，房间内的游戏机：</span><br><span class="line">+--------|-----------+</span><br><span class="line">| r_room | r_console |</span><br><span class="line">+--------|-----------+</span><br><span class="line">| room1  | Xbox      |</span><br><span class="line">| room2  | Switch    |</span><br><span class="line">| room3  | PS4       |</span><br><span class="line">| room3  | PSP       |</span><br><span class="line">| room4  | Switch    |</span><br><span class="line">+--------|-----------+</span><br><span class="line"></span><br><span class="line">表 &#x3D;users&#x3D;，包含用户名，年龄，电话号码和所在房间：</span><br><span class="line">+------|---------|-------|--------------|--------+</span><br><span class="line">| u_id | u_name  | u_age | u_phone      | u_room |</span><br><span class="line">+------|---------|-------|--------------|--------+</span><br><span class="line">|    1 | Alpha   |    25 | 028-87654321 | room2  |</span><br><span class="line">|    2 | Bravo   |    20 | 13888888888  | room2  |</span><br><span class="line">|    3 | Charlie |    66 | 13777777777  | room3  |</span><br><span class="line">|    4 | Delta   |    17 | 13666666666  | room1  |</span><br><span class="line">|    5 | Echo    |    39 | 13555555555  | room4  |</span><br><span class="line">+------|---------|-------|--------------|--------+</span><br><span class="line"></span><br><span class="line">表 &#x3D;games&#x3D;，包含每个游戏机对应能玩的游戏，以及该游戏是谁买的：</span><br><span class="line">+------|-----------|--------|---------+</span><br><span class="line">| g_id | g_console | g_game | g_owner |</span><br><span class="line">+------|-----------|--------|---------+</span><br><span class="line">|    1 | XBox      | DMC4   |       2 |</span><br><span class="line">|    2 | Switch    | Zelda  |       3 |</span><br><span class="line">|    3 | Switch    | Mario  |       4 |</span><br><span class="line">|    4 | PS4       | MHW    |       4 |</span><br><span class="line">|    5 | PSP       | MH3G   |       1 |</span><br><span class="line">+------|-----------|--------|---------+</span><br></pre></td></tr></table></figure>
 
@@ -429,7 +497,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM rooms;</span><br><span class="line">SELECT * FROM users;</span><br><span class="line">SELECT * FROM games;</span><br></pre></td></tr></table></figure>
 
 <p>下面的学习都基于这个数据库。  </p>
-<h1 id="SQL-约束"><a href="#SQL-约束" class="headerlink" title="SQL 约束"></a>SQL 约束</h1><p>使用 <code>cat -n ~/db_gamer.sql</code> 查看代码内容，<code>-n</code> 参数表示列印出行号，下面讲解为了方便会使用行号表述。  </p>
+<h1 id="SQL-约束-Constraint"><a href="#SQL-约束-Constraint" class="headerlink" title="SQL 约束 Constraint"></a>SQL 约束 Constraint</h1><p>使用 <code>cat -n ~/db_gamer.sql</code> 查看代码内容，<code>-n</code> 参数表示列印出行号，下面讲解为了方便会使用行号表述。  </p>
 <p>代码中你所不熟悉的内容统统称之为<strong>约束</strong>，约束是一种限制，它对表的数据做出限制，来确数据的完整和表之间的关系。  </p>
 <table>
 <thead>
@@ -439,7 +507,7 @@
 <th>DEFAULT</th>
 <th>UNIQUE</th>
 <th>NOT NULL</th>
-<th>AUTO<sub>INCREMENT</sub></th>
+<th>AUTO_INCREMENT</th>
 </tr>
 </thead>
 <tbody><tr>
@@ -458,17 +526,17 @@
 <p>外键主要体现表之间的关系，一个表可以有多个外键。  </p>
 <p>每个外键必须 REFERENCES (参考) 另一个表的主键，被外键约束的列，取值必须在它参考的列中有对应值。  </p>
 <p>在 <code>INSERT</code> 时，如果被外键约束的值没有在参考列中有对应，则操作失败。  </p>
-<p>第 24 行意为 games 表中的 g<sub>owner</sub> 字段必须参考 users 表中的 u<sub>id</sub> 字段。  </p>
+<p>第 24 行意为 games 表中的 g_owner 字段必须参考 users 表中的 u_id 字段。  </p>
 <h2 id="默认值-DEFAULT"><a href="#默认值-DEFAULT" class="headerlink" title="默认值 (DEFAULT)"></a>默认值 (DEFAULT)</h2><p>第 15 行定义了默认值  </p>
 <p>有 <code>DEFAULT</code> 约束的字段，使用 <code>INSERT</code> 命令插入数据为空时，填入默认值。  </p>
-<p>参考第 34 行，我们没有给用户 Alpha 写入 u<sub>phone</sub>，那么他的 u<sub>phone</sub> 就应该是 DEFAULT 定义的 “028-87654321”：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ariaDB [db_gamer]&gt; SELECT * FROM users;</span><br><span class="line">+------|---------|-------|--------------|--------+</span><br><span class="line">| u_id | u_name  | u_age | u_phone      | u_room |</span><br><span class="line">+------|---------|-------|--------------|--------+</span><br><span class="line">|    1 | Alpha   |    25 | 028-87654321 | room2  |</span><br><span class="line">|    2 | Bravo   |    20 | 13888888888  | room2  |</span><br><span class="line">|    3 | Charlie |    66 | 13777777777  | room3  |</span><br><span class="line">|    4 | Delta   |    17 | 13666666666  | room1  |</span><br><span class="line">|    5 | Echo    |    39 | 13555555555  | room4  |</span><br><span class="line">+------|---------|-------|--------------|--------+</span><br></pre></td></tr></table></figure>
+<p>参考第 34 行，我们没有给用户 Alpha 写入 u_phone，那么他的 u_phone 就应该是 DEFAULT 定义的 “028-87654321”：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ariaDB [db\_gamer]&gt; SELECT * FROM users;</span><br><span class="line">+------|---------|-------|--------------|--------+</span><br><span class="line">| u\_id | u\_name  | u\_age | u\_phone      | u\_room |</span><br><span class="line">+------|---------|-------|--------------|--------+</span><br><span class="line">|    1 | Alpha   |    25 | 028-87654321 | room2  |</span><br><span class="line">|    2 | Bravo   |    20 | 13888888888  | room2  |</span><br><span class="line">|    3 | Charlie |    66 | 13777777777  | room3  |</span><br><span class="line">|    4 | Delta   |    17 | 13666666666  | room1  |</span><br><span class="line">|    5 | Echo    |    39 | 13555555555  | room4  |</span><br><span class="line">+------|---------|-------|--------------|--------+</span><br></pre></td></tr></table></figure>
 
 <h2 id="唯一约束-UNIQUE"><a href="#唯一约束-UNIQUE" class="headerlink" title="唯一约束 (UNIQUE)"></a>唯一约束 (UNIQUE)</h2><p>第 13 行定义了唯一约束  </p>
 <p><code>UNIQUE</code> 约束的字段的值不能有重复。当 <code>INSERT</code> 数据重复时，会操作失败。  </p>
 <h2 id="非空约束-NOT-NULL"><a href="#非空约束-NOT-NULL" class="headerlink" title="非空约束 (NOT NULL)"></a>非空约束 (NOT NULL)</h2><p>第 7 行定义了非空约束  </p>
 <p>被非空约束的列，在插入值时必须非空。  </p>
-<h2 id="自增-AUTOINCREMENT"><a href="#自增-AUTOINCREMENT" class="headerlink" title="自增 (AUTOINCREMENT)"></a>自增 (AUTO<sub>INCREMENT</sub>)</h2><p>第 12、20 行定义了自增  </p>
+<h2 id="自增-AUTO-INCREMENT"><a href="#自增-AUTO-INCREMENT" class="headerlink" title="自增 (AUTO_INCREMENT)"></a>自增 (AUTO_INCREMENT)</h2><p>第 12、20 行定义了自增  </p>
 <p>在第 34 ~ 38 行 <code>INSERT INTO users</code> 的时候，代码中并没有写入 <code>u_id</code> 的值，但表中自动为五个用户写入了 <code>u_id</code> 1、2、3、4、5，就是因为我们写入了自增约束  </p>
 <p>第 40 ~ 44 行 <code>INSERT INTO games</code> 也是同理  </p>
 <h2 id="TODO-约束实验"><a href="#TODO-约束实验" class="headerlink" title="TODO 约束实验"></a>TODO 约束实验</h2><p>对于几种约束做几个实验：  </p>
@@ -658,7 +726,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL-的注释方法："><span class="nav-number">1.</span> <span class="nav-text">MySQL 的注释方法：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装和启动-MySQL-服务"><span class="nav-number">2.</span> <span class="nav-text">安装和启动 MySQL 服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ubuntu"><span class="nav-number">2.1.</span> <span class="nav-text">Ubuntu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CentOS-7"><span class="nav-number">2.2.</span> <span class="nav-text">CentOS 7</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL-数据库的基本使用方法"><span class="nav-number">3.</span> <span class="nav-text">MySQL 数据库的基本使用方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#新建数据库和数据表"><span class="nav-number">4.</span> <span class="nav-text">新建数据库和数据表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL-常用的的数据类型"><span class="nav-number">4.1.</span> <span class="nav-text">MySQL 常用的的数据类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在数据表中插入数据"><span class="nav-number">5.</span> <span class="nav-text">在数据表中插入数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建-db-gamer-数据库"><span class="nav-number">6.</span> <span class="nav-text">创建 db_gamer 数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL-约束"><span class="nav-number">7.</span> <span class="nav-text">SQL 约束</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主键-PRIMARY-KEY"><span class="nav-number">7.1.</span> <span class="nav-text">主键 (PRIMARY KEY)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外键-FOREIGN-KEY"><span class="nav-number">7.2.</span> <span class="nav-text">外键 (FOREIGN KEY)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#默认值-DEFAULT"><span class="nav-number">7.3.</span> <span class="nav-text">默认值 (DEFAULT)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#唯一约束-UNIQUE"><span class="nav-number">7.4.</span> <span class="nav-text">唯一约束 (UNIQUE)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非空约束-NOT-NULL"><span class="nav-number">7.5.</span> <span class="nav-text">非空约束 (NOT NULL)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自增-AUTOINCREMENT"><span class="nav-number">7.6.</span> <span class="nav-text">自增 (AUTOINCREMENT)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TODO-约束实验"><span class="nav-number">7.7.</span> <span class="nav-text">TODO 约束实验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SELECT"><span class="nav-number">8.</span> <span class="nav-text">SELECT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SELECT-基本语法"><span class="nav-number">8.1.</span> <span class="nav-text">SELECT 基本语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LIKE-通配符"><span class="nav-number">8.2.</span> <span class="nav-text">LIKE + 通配符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序-ORDER-BY"><span class="nav-number">8.3.</span> <span class="nav-text">排序 ORDER BY</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL-聚合函数"><span class="nav-number">8.4.</span> <span class="nav-text">SQL 聚合函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分组：GROUP-BY"><span class="nav-number">8.5.</span> <span class="nav-text">分组：GROUP BY</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HAVING-和-WHERE-的区别"><span class="nav-number">8.6.</span> <span class="nav-text">HAVING 和 WHERE 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接：JOIN-ON"><span class="nav-number">8.7.</span> <span class="nav-text">连接：JOIN ON</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL-的注释方法："><span class="nav-number">1.</span> <span class="nav-text">MySQL 的注释方法：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装和启动-MySQL-服务"><span class="nav-number">2.</span> <span class="nav-text">安装和启动 MySQL 服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ubuntu"><span class="nav-number">2.1.</span> <span class="nav-text">Ubuntu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CentOS-7"><span class="nav-number">2.2.</span> <span class="nav-text">CentOS 7</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库的基本概念"><span class="nav-number">3.</span> <span class="nav-text">数据库的基本概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL-数据库的基本使用方法"><span class="nav-number">4.</span> <span class="nav-text">MySQL 数据库的基本使用方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#新建数据库和数据表"><span class="nav-number">5.</span> <span class="nav-text">新建数据库和数据表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL-常用的的数据类型"><span class="nav-number">5.1.</span> <span class="nav-text">MySQL 常用的的数据类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在数据表中插入数据"><span class="nav-number">6.</span> <span class="nav-text">在数据表中插入数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建-db-gamer-数据库"><span class="nav-number">7.</span> <span class="nav-text">创建 db_gamer 数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL-约束-Constraint"><span class="nav-number">8.</span> <span class="nav-text">SQL 约束 Constraint</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主键-PRIMARY-KEY"><span class="nav-number">8.1.</span> <span class="nav-text">主键 (PRIMARY KEY)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外键-FOREIGN-KEY"><span class="nav-number">8.2.</span> <span class="nav-text">外键 (FOREIGN KEY)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#默认值-DEFAULT"><span class="nav-number">8.3.</span> <span class="nav-text">默认值 (DEFAULT)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#唯一约束-UNIQUE"><span class="nav-number">8.4.</span> <span class="nav-text">唯一约束 (UNIQUE)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非空约束-NOT-NULL"><span class="nav-number">8.5.</span> <span class="nav-text">非空约束 (NOT NULL)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自增-AUTO-INCREMENT"><span class="nav-number">8.6.</span> <span class="nav-text">自增 (AUTO_INCREMENT)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TODO-约束实验"><span class="nav-number">8.7.</span> <span class="nav-text">TODO 约束实验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SELECT"><span class="nav-number">9.</span> <span class="nav-text">SELECT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SELECT-基本语法"><span class="nav-number">9.1.</span> <span class="nav-text">SELECT 基本语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LIKE-通配符"><span class="nav-number">9.2.</span> <span class="nav-text">LIKE + 通配符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序-ORDER-BY"><span class="nav-number">9.3.</span> <span class="nav-text">排序 ORDER BY</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL-聚合函数"><span class="nav-number">9.4.</span> <span class="nav-text">SQL 聚合函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分组：GROUP-BY"><span class="nav-number">9.5.</span> <span class="nav-text">分组：GROUP BY</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HAVING-和-WHERE-的区别"><span class="nav-number">9.6.</span> <span class="nav-text">HAVING 和 WHERE 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接：JOIN-ON"><span class="nav-number">9.7.</span> <span class="nav-text">连接：JOIN ON</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -674,7 +742,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
