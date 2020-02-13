@@ -46,20 +46,21 @@
   };
 </script>
 
-  <meta name="description" content="配置添加环境变量   12345# 在~&#x2F;.zshrc 最后一行添加export PATH&#x3D;$PATH:~&#x2F;.emacs.d&#x2F;bin# 之后就可以使用这些代码了doom help # 查看帮助doom refresh # 安装删除包">
+  <meta name="description" content="note基本数据类型、数组、字符串之间不同的数据传递">
 <meta property="og:type" content="article">
-<meta property="og:title" content="终于对 Spacemacs 忍无可忍，你好 Doom-Emacs">
-<meta property="og:url" content="http://archcst.me/2018/doom-emacs/index.html">
+<meta property="og:title" content="Java x D11">
+<meta property="og:url" content="http://archcst.me/WNCD67/Phase_1/day_11/index.html">
 <meta property="og:site_name" content="ArchCST&#39;s Blog">
-<meta property="og:description" content="配置添加环境变量   12345# 在~&#x2F;.zshrc 最后一行添加export PATH&#x3D;$PATH:~&#x2F;.emacs.d&#x2F;bin# 之后就可以使用这些代码了doom help # 查看帮助doom refresh # 安装删除包">
+<meta property="og:description" content="note基本数据类型、数组、字符串之间不同的数据传递">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2019-07-21T16:00:00.000Z">
-<meta property="article:modified_time" content="2019-12-23T05:30:03.034Z">
+<meta property="article:published_time" content="2019-12-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2019-12-27T06:52:06.825Z">
 <meta property="article:author" content="ArchCST">
-<meta property="article:tag" content="cheatsheet">
+<meta property="article:tag" content="learn">
+<meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://archcst.me/2018/doom-emacs/">
+<link rel="canonical" href="http://archcst.me/WNCD67/Phase_1/day_11/">
 
 
 <script id="page-configurations">
@@ -71,7 +72,7 @@
   };
 </script>
 
-  <title>终于对 Spacemacs 忍无可忍，你好 Doom-Emacs | ArchCST's Blog</title>
+  <title>Java x D11 | ArchCST's Blog</title>
   
 
 
@@ -200,7 +201,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://archcst.me/2018/doom-emacs/">
+    <link itemprop="mainEntityOfPage" href="http://archcst.me/WNCD67/Phase_1/day_11/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -213,7 +214,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          终于对 Spacemacs 忍无可忍，你好 Doom-Emacs
+          Java x D11
         </h1>
 
         <div class="post-meta">
@@ -223,14 +224,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-07-22 00:00:00" itemprop="dateCreated datePublished" datetime="2019-07-22T00:00:00+08:00">2019-07-22</time>
+              <time title="创建时间：2019-12-26 00:00:00" itemprop="dateCreated datePublished" datetime="2019-12-26T00:00:00+08:00">2019-12-26</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-23 13:30:03" itemprop="dateModified" datetime="2019-12-23T13:30:03+08:00">2019-12-23</time>
+                <time title="修改时间：2019-12-27 14:52:06" itemprop="dateModified" datetime="2019-12-27T14:52:06+08:00">2019-12-27</time>
               </span>
 
           
@@ -242,8 +243,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2018/doom-emacs/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2018/doom-emacs/" itemprop="commentCount"></span>
+    <a title="valine" href="/WNCD67/Phase_1/day_11/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/WNCD67/Phase_1/day_11/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -258,139 +259,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>添加环境变量  </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 在~/.zshrc 最后一行添加</span></span><br><span class="line">export PATH=$PATH:~/.emacs.d/bin</span><br><span class="line"><span class="meta">#</span><span class="bash"> 之后就可以使用这些代码了</span></span><br><span class="line">doom help # 查看帮助</span><br><span class="line">doom refresh # 安装删除包</span><br></pre></td></tr></table></figure>
-
+        <blockquote class="blockquote-center"><p><span style="font-variant: small-caps;">note</span><br><em>基本数据类型、数组、字符串之间不同的数据传递</em></p>
+</blockquote>
 <a id="more"></a>
 
-<p>还是使用了 <code>fcitx.el</code> 来避免跳出 insert-state 时仍旧是是中文输入法  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(setq fcitx-active-evil-states &#39;(insert emacs hybrid))</span><br><span class="line">  (fcitx-aggressive-setup)</span><br><span class="line">  (fcitx-prefix-keys-add &quot;M-x&quot;)</span><br><span class="line">  (fcitx-prefix-keys-add &quot;SPC&quot;)</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h1><h2 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h2><table>
-<thead>
-<tr>
-<th>快捷键</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>SPC .</code></td>
-<td>打开文件</td>
-</tr>
-<tr>
-<td><code>SPC f r</code></td>
-<td>打开最近打开过的文件</td>
-</tr>
-<tr>
-<td><code>SPC b B</code></td>
-<td>在所有已打开的 Buffer 中切换</td>
-</tr>
-<tr>
-<td><code>u</code></td>
-<td>撤销</td>
-</tr>
-<tr>
-<td><code>C-r</code></td>
-<td>重做</td>
-</tr>
-<tr>
-<td><code>C-x u</code></td>
-<td>undo-tree，可视化撤销和重做</td>
-</tr>
-<tr>
-<td><code>g c c</code></td>
-<td>注释</td>
-</tr>
-<tr>
-<td></td>
-<td>代码对齐</td>
-</tr>
-<tr>
-<td></td>
-<td>80格子</td>
-</tr>
-</tbody></table>
-<h2 id="工作区-Workspace"><a href="#工作区-Workspace" class="headerlink" title="工作区 Workspace"></a>工作区 Workspace</h2><p>使用工作区可以保存当前项目的编辑状态，这样可以快速进入工作状态。工作区和<br>projectile 配合使用是非常舒服的。  </p>
-<p>从 Doom 的快捷键设计可以看出，Doom 的 workflow 基本上就是围绕着工作区展开的。  </p>
-<p>使用 <code>SPC TAB n</code> 新建工作区，建立好之后 <code>SPC TAB r</code> 对当前工作区命名，进入到工作<br>状态后 <code>SPC TAB s</code> 进行保存。之后就可以通过 <code>SPC TAB .</code> 来切换工作区了。同时也可<br>以通过 <code>SPC TAB 数字</code> 来快速切换。  </p>
-<p>当不再需要某个工作区时，可以通过 <code>SPC TAB d</code> 来删除当前工作区。  </p>
-<p>重启 emacs 后需要使用 <code>SPC TAB l</code> 来加载工作区。  </p>
-<p>工作区1名字为 <code>main</code> 应该留作处理一切非项目的工作，例如 <code>org-mode</code> 等。  </p>
-<p>常用的快捷键：  </p>
-<table>
-<thead>
-<tr>
-<th>快捷键</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>SPC ,</code></td>
-<td>切换到当前项目已经打开的buffer</td>
-</tr>
-<tr>
-<td><code>SPC SPC</code></td>
-<td>切换到当前项目中的任意文件</td>
-</tr>
-</tbody></table>
-<h2 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h2><table>
-<thead>
-<tr>
-<th>快捷键</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>SPC / p</code></td>
-<td>在整个项目的所有文件中搜索</td>
-</tr>
-<tr>
-<td><code>/</code></td>
-<td>在当前 buffer 中向下搜索，使用 <code>n</code> 或者 <code>N</code> 在结果中跳转</td>
-</tr>
-<tr>
-<td><code>?</code></td>
-<td>在当前 buffer 中向上搜索，使用 <code>n</code> 或者 <code>N</code> 在结果中跳转</td>
-</tr>
-</tbody></table>
-<p>使用 <code>SPC / p</code> 在整个项目中搜索关键字，之后可以通过 <code>C-c C-e</code> 在搜索结果中进行编<br>辑。编辑完成后通过 <code>C-c C-c</code> 提交，或者通过 <code>C-c C-k</code> 放弃更改。  </p>
-<h2 id="光标快速移动"><a href="#光标快速移动" class="headerlink" title="光标快速移动"></a>光标快速移动</h2><p>例句：This is not Iris, this is Isabel<br>This is not Iris, this is Isabel<br>把光标放到这一句的开头，在 normal-state 下按下 <code>s</code> 启动 <a href="https://github.com/hlissner/evil-snipe" target="_blank" rel="noopener">evil-snipe</a> ( <code>S</code> 向前)，这时输入<br><code>is</code> 可以将光标移动到下一个匹配 <code>is</code> 的位置，同时标注这一句话中所有的 <code>is</code> ，不<br>区分大小写，然后可以使用 <code>;/,</code> 向后/向前移动光标。  </p>
-<p>另外一个在可见区域内移动光标的方式是使用 <a href="https://github.com/abo-abo/avy" target="_blank" rel="noopener">avy</a> ，快捷键是 <code>g s SPC</code> 。按下快捷键后<br>输入目标文字，稍等0.5秒会出现对应的字母，按下对应字母就可以将光标移动过去。  </p>
-<p>这两个光标移动的方式可以极大的提高编辑速度。  </p>
-<p>另外 avy 还提供了一个 <code>avy-goto-char-2</code> 的函数，输入两个字符移动到匹配位置，也非<br>常好用。  </p>
-<p>无论是 evil-snipe 还是 avy 都可以使用 <code>v</code> 来快速选中，区别是 <code>s</code> 会包含定位字<br>符， <code>g s SPC</code> 则不会。  </p>
-<h2 id="多光标"><a href="#多光标" class="headerlink" title="多光标"></a>多光标</h2><p>evil-multiedit 方式<br>使用 <code>v</code> 选中文本后，键入 <code>R</code> 可以进入多光标编辑模式，会自动选中 buffer 中其他匹<br>配的文本。modeline最左边也将现实匹配的文本数量。  </p>
-<p>这时使用 <code>C-n</code> <code>C-p</code> 可以在匹配文本中轮换，按 <code>RET</code> 反选当前匹配项。选好候选项后<br>编辑其中一个匹配项，再按 <code>ESC</code> 退出即可应用到所有选中的匹配项。  </p>
-<p>如果不想全部选中，那么 <code>v</code> 选中文本后使用 <code>M-d</code> <code>M-D</code> 则可以向上向下一条一条的匹<br>配。  </p>
-<p>evil-mc 方式<br>那么如何在任意地方插入光标呢，使用 <code>g z z</code> 在当前位置创建光标即可。还有一些方法<br>如下：  </p>
-<table>
-<thead>
-<tr>
-<th>快捷键</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>g z m</code></td>
-<td>标记当前单词的所有匹配项</td>
-</tr>
-<tr>
-<td><code>g z d</code></td>
-<td>标记当前单词并移动到下一个匹配项</td>
-</tr>
-<tr>
-<td><code>g z j</code></td>
-<td>在当前位置创建光标，将光标移动到下一行</td>
-</tr>
-<tr>
-<td><code>g z u</code></td>
-<td>取消上一个光标，类似于 undo</td>
-</tr>
-</tbody></table>
-<h1 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h1><p><code>SPC SPC</code> 中已经删除的文件依然存在  </p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://medium.com/@aria_39488/getting-started-with-doom-emacs-a-great-transition-from-vim-to-emacs-9bab8e0d8458" target="_blank" rel="noopener">Getting started with Doom Emacs</a><br><a href="https://noelwelsh.com/posts/2019-01-10-doom-emacs.html" target="_blank" rel="noopener">Noel Welsh: Doom Emacs Workflows</a></p>
-
+<h1 id="基本数据类型、数组、字符串之间不同的数据传递"><a href="#基本数据类型、数组、字符串之间不同的数据传递" class="headerlink" title="基本数据类型、数组、字符串之间不同的数据传递"></a>基本数据类型、数组、字符串之间不同的数据传递</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DataTransfer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        DataTransfer dt = <span class="keyword">new</span> DataTransfer();</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">11</span>;</span><br><span class="line">        <span class="comment">// 值传递</span></span><br><span class="line">        <span class="comment">// 把栈里 a 存的基本数据类型 int 的值传递给了 test 的形参</span></span><br><span class="line">        dt.transferInt(a);</span><br><span class="line">        System.out.println(<span class="string">"原变量的值："</span>+a);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 分割线</span></span><br><span class="line">        System.out.println(<span class="string">"---------"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span>[] array = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>&#125;;</span><br><span class="line">        <span class="comment">// 址传递，实际上也是值传递</span></span><br><span class="line">        <span class="comment">// 把栈里 array 存的地址（引用类型存在栈里的值就是指向堆的地址）传递给了 testPlus 的形参</span></span><br><span class="line">        dt.transferArray(array);</span><br><span class="line">        System.out.println(<span class="string">"原变量的值："</span> + array[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 分割线</span></span><br><span class="line">        System.out.println(<span class="string">"---------"</span>);</span><br><span class="line"></span><br><span class="line">        String name = <span class="string">"Bruce"</span>;</span><br><span class="line">        <span class="comment">// 因为字符串是 final 过的 char 数组，所以修改字符串变量实际是给变量换了一个内存地址</span></span><br><span class="line">        dt.transferString(name);</span><br><span class="line">        System.out.println(<span class="string">"原变量的值："</span> + name);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transferInt</span><span class="params">(<span class="keyword">int</span> a)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"int 赋值前："</span> + a);</span><br><span class="line">        a = <span class="number">999</span>;</span><br><span class="line">        System.out.println(<span class="string">"int 赋值后："</span> + a);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transferArray</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"数组赋值前："</span> + nums[<span class="number">0</span>]);</span><br><span class="line">        nums[<span class="number">0</span>] =<span class="number">999</span>;</span><br><span class="line">        System.out.println(<span class="string">"数组赋值后："</span> + nums[<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transferString</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"字符串赋值前："</span> + str);</span><br><span class="line">        str =<span class="string">"Bob"</span>;</span><br><span class="line">        System.out.println(<span class="string">"字符串赋值后："</span> + str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">int 赋值前：11</span><br><span class="line">int 赋值后：999</span><br><span class="line">原变量的值：11</span><br><span class="line">---------</span><br><span class="line">数组赋值前：1</span><br><span class="line">数组赋值后：999</span><br><span class="line">原变量的值：999</span><br><span class="line">---------</span><br><span class="line">字符串赋值前：Bruce</span><br><span class="line">字符串赋值后：Bob</span><br><span class="line">原变量的值：Bruce</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -405,7 +280,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://archcst.me/2018/doom-emacs/" title="终于对 Spacemacs 忍无可忍，你好 Doom-Emacs">http://archcst.me/2018/doom-emacs/</a>
+    <a href="http://archcst.me/WNCD67/Phase_1/day_11/" title="Java x D11">http://archcst.me/WNCD67/Phase_1/day_11/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -416,7 +291,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/cheatsheet/" rel="tag"># cheatsheet</a>
+              <a href="/tags/learn/" rel="tag"># learn</a>
+              <a href="/tags/java/" rel="tag"># java</a>
           </div>
 
         
@@ -425,12 +301,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2018/cs-flask-initial/" rel="prev" title="Cheatsheet Flask 虚拟环境搭建">
-      <i class="fa fa-chevron-left"></i> Cheatsheet Flask 虚拟环境搭建
+    <a href="/WNCD67/Phase_1/day_10/" rel="prev" title="Java x D10">
+      <i class="fa fa-chevron-left"></i> Java x D10
     </a></div>
       <div class="post-nav-item">
-    <a href="/WNCD67/Phase_1/day_3/" rel="next" title="Java x D3">
-      Java x D3 <i class="fa fa-chevron-right"></i>
+    <a href="/WNCD67/Phase_1/day_12/" rel="next" title="Java x D12">
+      Java x D12 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -492,7 +368,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#配置"><span class="nav-number">1.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#快捷键"><span class="nav-number">2.</span> <span class="nav-text">快捷键</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用快捷键"><span class="nav-number">2.1.</span> <span class="nav-text">常用快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工作区-Workspace"><span class="nav-number">2.2.</span> <span class="nav-text">工作区 Workspace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索"><span class="nav-number">2.3.</span> <span class="nav-text">搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#光标快速移动"><span class="nav-number">2.4.</span> <span class="nav-text">光标快速移动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多光标"><span class="nav-number">2.5.</span> <span class="nav-text">多光标</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#遗留问题"><span class="nav-number">3.</span> <span class="nav-text">遗留问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本数据类型、数组、字符串之间不同的数据传递"><span class="nav-number">1.</span> <span class="nav-text">基本数据类型、数组、字符串之间不同的数据传递</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
