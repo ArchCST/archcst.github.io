@@ -46,21 +46,26 @@
   };
 </script>
 
-  <meta name="description" content="question罗马数字转整数">
+  <meta name="description" content="JSP 脚本在 JSP 文件中可以定义三种脚本：&lt;% 代码 %&gt;：定义的 java 代码在对应的 servlet 的 service() 方法中，也就是说 service 方法中可以定义什么，该脚本就可以定义什么。 &lt;%! 代码 %&gt;：定义的是对应的 servlet 的成员。可以定义成员变量、成员方法、代码块等等。一般用来定义成员方法。 &lt;%&#x3D; 代码 %&gt;：定义">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java x Leetcode [Q:0013]">
-<meta property="og:url" content="http://archcst.me/leetcode/0013/index.html">
+<meta property="og:title" content="WNCD67&#x2F;Phase_2&#x2F;LearnJSP">
+<meta property="og:url" content="http://archcst.me/WNCD67/Phase_2/LearnJSP/index.html">
 <meta property="og:site_name" content="ArchCST&#39;s Blog">
-<meta property="og:description" content="question罗马数字转整数">
+<meta property="og:description" content="JSP 脚本在 JSP 文件中可以定义三种脚本：&lt;% 代码 %&gt;：定义的 java 代码在对应的 servlet 的 service() 方法中，也就是说 service 方法中可以定义什么，该脚本就可以定义什么。 &lt;%! 代码 %&gt;：定义的是对应的 servlet 的成员。可以定义成员变量、成员方法、代码块等等。一般用来定义成员方法。 &lt;%&#x3D; 代码 %&gt;：定义">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-02-25T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-02-27T13:32:42.874Z">
+<meta property="article:published_time" content="2020-03-05T07:21:10.108Z">
+<meta property="article:modified_time" content="2020-03-05T07:31:38.377Z">
 <meta property="article:author" content="ArchCST">
-<meta property="article:tag" content="learn">
-<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="emacs">
+<meta property="article:tag" content="spacemacs">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="运维">
+<meta property="article:tag" content="效率">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://archcst.me/leetcode/0013/">
+<link rel="canonical" href="http://archcst.me/WNCD67/Phase_2/LearnJSP/">
 
 
 <script id="page-configurations">
@@ -72,7 +77,7 @@
   };
 </script>
 
-  <title>Java x Leetcode [Q:0013] | ArchCST's Blog</title>
+  <title>WNCD67/Phase_2/LearnJSP | ArchCST's Blog</title>
   
 
 
@@ -201,7 +206,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://archcst.me/leetcode/0013/">
+    <link itemprop="mainEntityOfPage" href="http://archcst.me/WNCD67/Phase_2/LearnJSP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -214,7 +219,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Java x Leetcode [Q:0013]
+          WNCD67/Phase_2/LearnJSP
         </h1>
 
         <div class="post-meta">
@@ -223,16 +228,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-02-26 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-26T00:00:00+08:00">2020-02-26</time>
+              <time title="创建时间：2020-03-05 15:21:10 / 修改时间：15:31:38" itemprop="dateCreated datePublished" datetime="2020-03-05T15:21:10+08:00">2020-03-05</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-27 21:32:42" itemprop="dateModified" datetime="2020-02-27T21:32:42+08:00">2020-02-27</time>
-              </span>
 
           
   
@@ -243,8 +242,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/leetcode/0013/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/leetcode/0013/" itemprop="commentCount"></span>
+    <a title="valine" href="/WNCD67/Phase_2/LearnJSP/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/WNCD67/Phase_2/LearnJSP/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -259,15 +258,71 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <blockquote class="blockquote-center"><p><span style="font-variant: small-caps;">question</span><br>罗马数字转整数</p>
-</blockquote>
-<a id="more"></a>
+        <h1 id="JSP-脚本"><a href="#JSP-脚本" class="headerlink" title="JSP 脚本"></a>JSP 脚本</h1><p>在 JSP 文件中可以定义三种脚本：<br><code>&lt;% 代码 %&gt;</code>：<br>定义的 java 代码在对应的 servlet 的 service() 方法中，<br>也就是说 service 方法中可以定义什么，<br>该脚本就可以定义什么。</p>
+<p><code>&lt;%! 代码 %&gt;</code>：<br>定义的是对应的 servlet 的成员。<br>可以定义成员变量、成员方法、代码块等等。<br>一般用来定义成员方法。</p>
+<p><code>&lt;%= 代码 %&gt;</code>：<br>定义输出语句。转换为 out.print(代码);</p>
+<p><code>&lt;%-- --%&gt;</code>:<br>JSP 的注释，也可以注释掉 html。</p>
+<h1 id="JSP-指令"><a href="#JSP-指令" class="headerlink" title="JSP 指令"></a>JSP 指令</h1><p>指令有三种：<code>page</code>、<code>include</code>、<code>taglib</code></p>
+<h2 id="page-设置页面的属性、导入模块等"><a href="#page-设置页面的属性、导入模块等" class="headerlink" title="page 设置页面的属性、导入模块等"></a><code>page</code> 设置页面的属性、导入模块等</h2><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">"text/html;charset=UTF-8"</span> language=<span class="string">"java"</span> %&gt;</span><br></pre></td></tr></table></figure>
 
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><strong>编号</strong>：0013<br><strong>链接</strong>：<a href="https://leetcode-cn.com/problems/roman-to-integer/" target="_blank" rel="noopener">力扣</a><br><strong>题目</strong>：罗马数字转整数<br><strong>简述</strong>：</p>
 <ul>
-<li>3999 以内，且无需判断输入是否正确</li>
+<li><code>contentType</code>: 等同于 <code>response.setContentType()</code></li>
+<li><code>import</code>: 导包</li>
+<li><code>errorPage</code>: Servlet页面如果发生错误会 <strong>转发</strong> 到错误提示页面</li>
+<li><code>isErrorPage</code>: 默认为 false，改为 true 才可使用 <code>exception</code> 这个内置对象</li>
 </ul>
-<h1 id="题解-Java"><a href="#题解-Java" class="headerlink" title="题解(Java)"></a>题解(Java)</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Q0013</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 用 switch 会比 HashMap 快很多倍</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getValue</span><span class="params">(<span class="keyword">char</span> c)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (c) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'I'</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'V'</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">5</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'X'</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'L'</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">50</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'C'</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">100</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'D'</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">500</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'M'</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1000</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 核心思路，如果前面的数字大于后面的数字，则前面这个数字应该被减去</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">a1</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> i;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; s.length() - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (getValue(s.charAt(i)) &gt;= getValue(s.charAt(i + <span class="number">1</span>))) &#123;</span><br><span class="line">                result += getValue(s.charAt(i));</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                result -= getValue(s.charAt(i));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        result += getValue(s.charAt(i));</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(a1(<span class="string">"III"</span>)); <span class="comment">// 3</span></span><br><span class="line">        System.out.println(a1(<span class="string">"IV"</span>)); <span class="comment">// 4</span></span><br><span class="line">        System.out.println(a1(<span class="string">"IX"</span>)); <span class="comment">// 9</span></span><br><span class="line">        System.out.println(a1(<span class="string">"LVIII"</span>)); <span class="comment">// 58</span></span><br><span class="line">        System.out.println(a1(<span class="string">"MCMXCIV"</span>)); <span class="comment">// 1994</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="include-在当前页面中包含另一个页面"><a href="#include-在当前页面中包含另一个页面" class="headerlink" title="include 在当前页面中包含另一个页面"></a><code>include</code> 在当前页面中包含另一个页面</h2><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%<span class="meta">@include</span> file=<span class="string">"sub.jsp"</span>%&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="taglib-引入标签库"><a href="#taglib-引入标签库" class="headerlink" title="taglib 引入标签库"></a><code>taglib</code> 引入标签库</h2><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ taglib prefix=<span class="string">"c"</span> uri=<span class="string">"http://java.sun.com/jsp/jstl/core"</span> %&gt;</span><br></pre></td></tr></table></figure>
+<p><code>prefix</code> 定义自定义前缀，一般是约定俗成的名称。</p>
+<h1 id="JSP-内置对象"><a href="#JSP-内置对象" class="headerlink" title="JSP 内置对象"></a>JSP 内置对象</h1><p>JSP 的内置对象是指在 JSP 中不需要获取和创建，可以直接使用的对象。</p>
+<h2 id="JSP-的九个内置对象"><a href="#JSP-的九个内置对象" class="headerlink" title="JSP 的九个内置对象:"></a>JSP 的九个内置对象:</h2><table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>真实类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pageContext</td>
+<td>javax.servlet.jsp.PageContext</td>
+</tr>
+<tr>
+<td>request</td>
+<td>javax.servlet.http.HttpServletRequest</td>
+</tr>
+<tr>
+<td>respnse</td>
+<td>javax.servlet.http.HttpServletResponse</td>
+</tr>
+<tr>
+<td>session</td>
+<td>javax.servlet.http.Session</td>
+</tr>
+<tr>
+<td>page</td>
+<td>java.lang.Object</td>
+</tr>
+<tr>
+<td>application</td>
+<td>javax.servlet.ServletContext</td>
+</tr>
+<tr>
+<td>config</td>
+<td>javax.servlet.SevletConfig</td>
+</tr>
+<tr>
+<td>exception</td>
+<td>java.lang.Throwable</td>
+</tr>
+<tr>
+<td>out</td>
+<td>javax.servlet.jsp.JspWriter</td>
+</tr>
+</tbody></table>
+<h3 id="pageContext"><a href="#pageContext" class="headerlink" title="pageContext"></a><code>pageContext</code></h3><h3 id="request-请求对象"><a href="#request-请求对象" class="headerlink" title="request 请求对象"></a><code>request</code> 请求对象</h3><h3 id="response-响应对象"><a href="#response-响应对象" class="headerlink" title="response 响应对象"></a><code>response</code> 响应对象</h3><h3 id="session"><a href="#session" class="headerlink" title="session"></a><code>session</code></h3><h3 id="page"><a href="#page" class="headerlink" title="page"></a><code>page</code></h3><h3 id="application"><a href="#application" class="headerlink" title="application"></a><code>application</code></h3><h3 id="config"><a href="#config" class="headerlink" title="config"></a><code>config</code></h3><h3 id="exception"><a href="#exception" class="headerlink" title="exception:"></a><code>exception</code>:</h3><p>只有在声明了 `isErrorPage=”true”</p>
+<h3 id="out："><a href="#out：" class="headerlink" title="out："></a><code>out</code>：</h3><p>字符输出流对象，可以将数据输出到页面上。<br>和 response.getWriter() 的区别是，tomcat 永远会先识别 response.getWriter() 的缓冲区数据，再找 out.print() 的缓冲区数据。<br>也就是，response.getWriter() 的输出永远在 out.print() 之前。<br>尽量在 .jsp 页面中都使用 out 以免打乱输出顺序。</p>
+
     </div>
 
     
@@ -282,7 +337,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://archcst.me/leetcode/0013/" title="Java x Leetcode [Q:0013]">http://archcst.me/leetcode/0013/</a>
+    <a href="http://archcst.me/WNCD67/Phase_2/LearnJSP/" title="WNCD67&#x2F;Phase_2&#x2F;LearnJSP">http://archcst.me/WNCD67/Phase_2/LearnJSP/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -292,10 +347,6 @@
 
 
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/learn/" rel="tag"># learn</a>
-              <a href="/tags/leetcode/" rel="tag"># leetcode</a>
-          </div>
 
         
 
@@ -303,13 +354,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/WNCD67/Phase_2/day_71/" rel="prev" title="Java x D71 | Servlet">
-      <i class="fa fa-chevron-left"></i> Java x D71 | Servlet
+    <a href="/leetcode/0038/" rel="prev" title="Java x Leetcode [Q:0038]">
+      <i class="fa fa-chevron-left"></i> Java x Leetcode [Q:0038]
     </a></div>
-      <div class="post-nav-item">
-    <a href="/leetcode/0014/" rel="next" title="Java x Leetcode [Q:0014]">
-      Java x Leetcode [Q:0014] <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -370,7 +418,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解-Java"><span class="nav-number">2.</span> <span class="nav-text">题解(Java)</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JSP-脚本"><span class="nav-number">1.</span> <span class="nav-text">JSP 脚本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSP-指令"><span class="nav-number">2.</span> <span class="nav-text">JSP 指令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#page-设置页面的属性、导入模块等"><span class="nav-number">2.1.</span> <span class="nav-text">page 设置页面的属性、导入模块等</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#include-在当前页面中包含另一个页面"><span class="nav-number">2.2.</span> <span class="nav-text">include 在当前页面中包含另一个页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#taglib-引入标签库"><span class="nav-number">2.3.</span> <span class="nav-text">taglib 引入标签库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSP-内置对象"><span class="nav-number">3.</span> <span class="nav-text">JSP 内置对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JSP-的九个内置对象"><span class="nav-number">3.1.</span> <span class="nav-text">JSP 的九个内置对象:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pageContext"><span class="nav-number">3.1.1.</span> <span class="nav-text">pageContext</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#request-请求对象"><span class="nav-number">3.1.2.</span> <span class="nav-text">request 请求对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#response-响应对象"><span class="nav-number">3.1.3.</span> <span class="nav-text">response 响应对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session"><span class="nav-number">3.1.4.</span> <span class="nav-text">session</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#page"><span class="nav-number">3.1.5.</span> <span class="nav-text">page</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#application"><span class="nav-number">3.1.6.</span> <span class="nav-text">application</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#config"><span class="nav-number">3.1.7.</span> <span class="nav-text">config</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#exception"><span class="nav-number">3.1.8.</span> <span class="nav-text">exception:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#out："><span class="nav-number">3.1.9.</span> <span class="nav-text">out：</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
